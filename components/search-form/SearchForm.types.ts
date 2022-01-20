@@ -2,5 +2,5 @@ import { IListItem, TSearchFunction } from './../../types/clientTypes';
 
 export interface ISearchFormProps {
   searchFunction: TSearchFunction;
-  setSearchItems: (data: IListItem[]) => void;
+  setSearchItems: (data: IListItem[] | null) => void;
 }

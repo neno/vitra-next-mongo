@@ -1,9 +1,7 @@
 import { FC, FormEvent, useState } from 'react';
 import { useQuery } from 'react-query';
-import { useRouter } from 'next/router';
-import { ContentContainer } from '..';
-import { autoCompleteObjects } from '../../lib/api-calls';
-import { IListItem, IObjectItem } from '../../types';
+import { ContentContainer, Icon } from '..';
+import { IconType, IListItem } from '../../types';
 import { ISearchFormProps } from './SearchForm.types';
 
 export const SearchForm: FC<ISearchFormProps> = ({
@@ -11,14 +9,11 @@ export const SearchForm: FC<ISearchFormProps> = ({
   setSearchItems,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [options, setOptions] = useState<IListItem[]>([]);
-  const router = useRouter();
 
   const { isLoading } = useQuery(
     [searchFunction.name, { q: searchTerm }],
     () =>
       searchFunction(searchTerm).then((res: IListItem[]) => {
-        console.log('autoCompleteObjects', res);
         setSearchItems(res);
       }),
     {
@@ -26,27 +21,13 @@ export const SearchForm: FC<ISearchFormProps> = ({
     }
   );
 
-  // const { isLoading } = useQuery(
-  //   ['autoCompleteObjects', { q: searchTerm }],
-  //   () =>
-  //     autoCompleteObjects(searchTerm).then((res: IObjectItem[]) => {
-  //       console.log('autoCompleteObjects', res);
-  //       setOptions(res);
-  //     }),
-  //   {
-  //     enabled: !!searchTerm && searchTerm.length > 2, // start searching only if there is an inputValue
-  //   }
-  // );
-
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+  };
 
-    // if (searchTerm) {
-    //   router.push({
-    //     pathname: `/search/${searchTerm}`,
-    //   });
-    //   setSearchTerm('');
-    // }
+  const reset = () => {
+    setSearchTerm('');
+    setSearchItems(null);
   };
 
   return (
@@ -56,13 +37,20 @@ export const SearchForm: FC<ISearchFormProps> = ({
           <label className="sr-only" htmlFor="vitra-search">
             Find Objects
           </label>
+          <Icon iconName={IconType.Search} size="2.5rem" />
           <input
             id="vitra-search"
             type="text"
             placeholder="Search…"
+            value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full h:12 md:h-14 text-2xl md:text-4xl leading-loose"
+            className="w-full h:12 md:h-14 text-2xl md:text-4xl leading-loose ml-2 mr-2"
           />
+          {searchTerm && (
+            <button onClick={reset} className="flex" title="Clear search term">
+              <Icon iconName={IconType.Close} />
+            </button>
+          )}
         </div>
       </ContentContainer>
     </form>

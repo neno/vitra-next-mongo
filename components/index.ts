@@ -8,3 +8,4 @@ export * from './object-details';
 export * from './search-form';
 export * from './content-container';
 export * from './icon';
+export * from './page-header';

@@ -6,7 +6,7 @@ export const Search: React.FC = () => (
     aria-hidden="true"
     className="a-icon a-icon--use-stroke"
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 100 100"
+    viewBox="5 5 100 100"
   >
     <g>
       <path

@@ -15,10 +15,13 @@ const icons = {
   [IconType.Up]: Up,
 };
 
-export const Icon: FC<IIconProps> = ({ iconName }) => {
+export const Icon: FC<IIconProps> = ({ iconName, size }) => {
   const Ico = icons[iconName];
   return (
-    <i className={styles.icon}>
+    <i
+      className={styles.icon}
+      style={size ? { width: size, height: size } : {}}
+    >
       <Ico />
     </i>
   );

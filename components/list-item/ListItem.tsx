@@ -1,13 +1,12 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { IListItemProps } from './ListItem.types';
 import { ContentContainer, Icon } from '..';
-import { IconType } from '../../types';
+import { IconType, IListItem } from '../../types';
 
-export const ListItem: FC<IListItemProps> = ({ id, imageUrl, title, text }) => {
+export const ListItem: FC<IListItem> = ({ id, imageUrl, title, text }) => {
   return (
-    <div className="relative z-0 hover:shadow-md hover:z-10">
+    <div className="relative">
       <ContentContainer>
         <article className="flex items-center">
           <div className="flex-0 w-20 md:w-24 h-20 md:h-24">

@@ -1,8 +1,7 @@
-import { IListItem } from './../types/clientTypes';
 import { dbConnect } from 'middleware/db';
 import Object from 'models/object';
-import { IObjectItemServer } from 'types/serverTypes';
 import { mapObjectDocumentsToListItems } from 'helper';
+import { IListItem } from './../types/clientTypes';
 
 const objectItemProjection = {
   _id: 1,
