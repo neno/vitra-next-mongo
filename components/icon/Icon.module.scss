@@ -1,0 +1,23 @@
+.icon {
+  height: 1.5em;
+  width: 1.5em;
+  display: inline-block;
+
+  svg {
+    height: 100%;
+    width: 100%;
+
+    path,
+    polyline {
+      fill: currentColor;
+    }
+
+    &--use-stroke {
+      path,
+      polyline {
+        fill: none;
+        stroke: currentColor;
+      }
+    }
+  }
+}
