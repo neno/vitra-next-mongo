@@ -47,6 +47,7 @@ const Object: NextPage<IPageProps> = ({ object }) => {
           dimensions: object.dimensions,
           inventoryNo: object.inventoryNo,
         }}
+        showDetailsInitially={!object.description}
       />
 
       {object.description && <RichText text={object.description} />}

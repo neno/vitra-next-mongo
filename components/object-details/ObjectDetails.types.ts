@@ -11,6 +11,7 @@ export interface IObjectDetailsProps {
     dimensions: string;
     inventoryNo: string;
   };
+  showDetailsInitially: boolean;
 }
 
 export enum ObjectDefListFieldType {
