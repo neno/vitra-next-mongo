@@ -9,3 +9,4 @@ export * from './search-form';
 export * from './content-container';
 export * from './icon';
 export * from './page-header';
+export * from './list';

@@ -9,6 +9,7 @@ import {
   IObjectItem,
   PersonType,
 } from '../types';
+import { arrayBuffer } from 'stream/consumers';
 
 export function getAsString(value: string | string[]): string {
   if (Array.isArray(value)) {
@@ -110,4 +111,17 @@ export const createTitleString = (
 ): string => {
   const str = `${title} ${subTitle}`.trim();
   return str ? `${str}, ${designed}` : designed;
+};
+
+export const splitArrayIntoEqualChunks = (
+  arr: any[],
+  size: number
+): any[] | any[][] => {
+  const res: any[][] = [];
+  while (arr.length > 0) {
+    const chunk = arr.splice(0, size);
+    res.push(chunk);
+  }
+
+  return res;
 };
