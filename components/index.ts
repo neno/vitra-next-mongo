@@ -11,3 +11,5 @@ export * from './icon';
 export * from './page-header';
 export * from './list';
 export * from './nothing-found';
+export * from './rich-text';
+export * from './aside';

@@ -1,7 +1,7 @@
 import { dbConnect } from 'middleware/db';
 import Object from 'models/object';
-import { mapObjectDocumentsToListItems } from 'helper';
-import { IListItem } from './../types/clientTypes';
+import { mapDocumentToObject, mapObjectDocumentsToListItems } from 'helper';
+import { IListItem, IObject } from './../types/clientTypes';
 
 const objectItemProjection = {
   _id: 1,
@@ -27,8 +27,14 @@ const objectProjection = {
 
 export async function fetchObjectItems(): Promise<IListItem[]> {
   await dbConnect();
-  const objects = await Object.find().exec();
+  const objects = await Object.find({}, objectItemProjection).exec();
   return mapObjectDocumentsToListItems(objects);
+}
+
+export async function fetchObject(_id: string): Promise<IObject> {
+  await dbConnect();
+  const object = await Object.findOne({ _id }, objectProjection).exec();
+  return mapDocumentToObject(object);
 }
 
 export async function autoCompleteObjects(q: string): Promise<IListItem[]> {
@@ -41,14 +47,7 @@ export async function autoCompleteObjects(q: string): Promise<IListItem[]> {
         path: 'ObjFullText',
       },
     })
-    .project({
-      _id: 1,
-      ObjObjectTitleTxt: 1,
-      ObjObjectTitleSubTxt: 1,
-      ObjDateGrp_DateFromTxt: 1,
-      ObjDesigner: 1,
-      ObjMultimediaRel: 1,
-    })
+    .project(objectItemProjection)
     .limit(10);
 
   return mapObjectDocumentsToListItems(objects);
