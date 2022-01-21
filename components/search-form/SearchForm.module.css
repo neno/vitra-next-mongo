@@ -1,0 +1,17 @@
+.sticky {
+  position: sticky;
+  z-index: 10;
+  top: -97px;
+  background-color: white;
+  transition: top 0.5s;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.stickyVisible {
+  top: 0;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+}
+
+.relative {
+  position: relative;
+}
