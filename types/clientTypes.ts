@@ -36,5 +36,3 @@ export interface IListItem {
 }
 
 export type TSearchFunction = (term: string) => Promise<IListItem[]>;
-
-export type TDomains = 'objects' | 'designers' | 'manufacturers';
