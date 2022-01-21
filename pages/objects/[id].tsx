@@ -1,4 +1,4 @@
-import { fetchObject } from 'lib/api';
+import { fetchAllObjectIds, fetchObject } from 'lib/api';
 import type { NextPage } from 'next';
 
 import {
@@ -6,12 +6,13 @@ import {
   ContentContainer,
   DetailImage,
   Heading,
+  List,
   ListItem,
   ObjectDetails,
   RichText,
 } from '../../components';
 // import { fetchObjectById } from '../../lib/api-calls';
-import { IObject, IRelatedItem } from '../../types';
+import { DomainType, IObject, IRelatedItem } from '../../types';
 
 interface IPath {
   params: { id: string };
@@ -52,41 +53,20 @@ const Object: NextPage<IPageProps> = ({ object }) => {
 
       {object.relatedObjects.length > 0 && (
         <Aside title="Objects">
-          {object.relatedObjects.map((rel: IRelatedItem) => (
-            <ListItem
-              key={rel.id}
-              id={rel.id}
-              imageUrl={rel.image}
-              title={rel.title}
-              text={rel.text}
-            />
-          ))}
+          <List items={object.relatedObjects} domain={DomainType.Objects} />
         </Aside>
       )}
       {object.relatedDesigners.length > 0 && (
         <Aside title="Designers">
-          {object.relatedDesigners.map((rel: IRelatedItem) => (
-            <ListItem
-              key={rel.id}
-              id={rel.id}
-              imageUrl={rel.image}
-              title={rel.title}
-              text={rel.text}
-            />
-          ))}
+          <List items={object.relatedDesigners} domain={DomainType.Objects} />
         </Aside>
       )}
       {object.relatedManufacturers.length > 0 && (
         <Aside title="Manufacturer">
-          {object.relatedManufacturers.map((rel: IRelatedItem) => (
-            <ListItem
-              key={rel.id}
-              id={rel.id}
-              imageUrl={rel.image}
-              title={rel.title}
-              text={rel.text}
-            />
-          ))}
+          <List
+            items={object.relatedManufacturers}
+            domain={DomainType.Objects}
+          />
         </Aside>
       )}
     </div>
@@ -96,16 +76,15 @@ const Object: NextPage<IPageProps> = ({ object }) => {
 export default Object;
 
 export async function getStaticPaths(): Promise<IGetStaticPathsProps> {
+  const objectIds = await fetchAllObjectIds();
+
   // const companies = await getCompanies();
-  // const paths = companies?.map((company) => ({
-  //   params: {
-  //     slug: company.slug,
-  //     region: company.regionSlug,
-  //     district: company.districtSlug,
-  //     industry: company.industrySlug,
-  //   },
-  // }));
-  const paths = [{ params: { id: '41592' } }];
+  const paths = objectIds?.map(({ _id }) => ({
+    params: {
+      id: _id.toString(),
+    },
+  }));
+  // const paths = [{ params: { id: '41592' } }];
 
   return {
     paths,

@@ -45,7 +45,7 @@ export const mapObjectDocumentsToListItems = (
       doc?.ObjDateGrp_DateFromTxt ?? ''
     ),
     text: doc?.ObjDesigner ?? '',
-    imageUrl: doc?.ObjMultimediaRel?.[0]?.MulUrl ?? '',
+    image: doc?.ObjMultimediaRel?.[0]?.MulUrl ?? '',
   }));
 };
 

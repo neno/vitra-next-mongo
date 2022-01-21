@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { fetchObjectItems } from 'lib/api';
 import { fetchAutoCompleteObjects } from 'lib/client-api';
 import { SearchForm, PageHeader, List } from '../components';
-import { IListItem } from '../types';
+import { DomainType, IListItem } from '../types';
 import { splitArrayIntoEqualChunks } from 'helper';
 import { useIntersect } from 'hooks/use-intersect';
 
@@ -28,13 +28,13 @@ const Home: NextPage<IPageProps> = ({ chunkItems }) => {
         searchFunction={fetchAutoCompleteObjects}
         setSearchItems={setSearchItems}
       />
-      {searchItems && <List items={searchItems} />}
+      {searchItems && <List items={searchItems} domain={DomainType.Objects} />}
       {items && items.length && (
         <div
           className="mt-[-1px]"
           style={!!searchItems ? { display: 'none' } : {}}
         >
-          <List items={items} />
+          <List items={items} domain={DomainType.Objects} />
         </div>
       )}
       <div ref={loadMoreRef}></div>

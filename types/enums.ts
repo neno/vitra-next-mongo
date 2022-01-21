@@ -13,3 +13,9 @@ export enum IconType {
   Search = 'Search',
   Up = 'Up',
 }
+
+export enum DomainType {
+  Objects = 'objects',
+  Designers = 'designers',
+  Manufacturers = 'Manufacturers',
+}

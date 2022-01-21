@@ -37,6 +37,14 @@ export async function fetchObject(_id: string): Promise<IObject> {
   return mapDocumentToObject(object);
 }
 
+export async function fetchAllObjectIds(): Promise<{ _id: string }[]> {
+  await dbConnect();
+  const objects = await Object.find({}, { _id: 1 }).exec();
+  console.log(objects);
+
+  return objects;
+}
+
 export async function autoCompleteObjects(q: string): Promise<IListItem[]> {
   await dbConnect();
   const objects = await Object.aggregate()

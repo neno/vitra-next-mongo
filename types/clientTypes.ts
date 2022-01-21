@@ -30,9 +30,11 @@ export interface IRelatedItem {
 
 export interface IListItem {
   id: number;
-  imageUrl: string | null;
+  image: string | null;
   title: string;
   text: string;
 }
 
 export type TSearchFunction = (term: string) => Promise<IListItem[]>;
+
+export type TDomains = 'objects' | 'designers' | 'manufacturers';

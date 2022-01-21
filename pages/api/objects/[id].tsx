@@ -56,7 +56,7 @@ const Object: NextPage<IPageProps> = ({ object }) => {
           <ListItem
             key={rel.id}
             id={rel.id}
-            imageUrl={rel.image}
+            image={rel.image}
             title={rel.title}
             text={rel.text}
           />
@@ -68,7 +68,7 @@ const Object: NextPage<IPageProps> = ({ object }) => {
           <ListItem
             key={rel.id}
             id={rel.id}
-            imageUrl={rel.image}
+            image={rel.image}
             title={rel.title}
             text={rel.text}
           />
@@ -80,7 +80,7 @@ const Object: NextPage<IPageProps> = ({ object }) => {
           <ListItem
             key={rel.id}
             id={rel.id}
-            imageUrl={rel.image}
+            image={rel.image}
             title={rel.title}
             text={rel.text}
           />
