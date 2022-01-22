@@ -25,8 +25,8 @@ export const ListItem: FC<IListItemProps> = ({
                     src={image}
                     width={96}
                     height={96}
-                    alt="Vitra Design Museum Logo"
-                    objectFit="cover"
+                    alt={title}
+                    objectFit="contain"
                   />
                 </a>
               </Link>

@@ -13,7 +13,13 @@ const navItems = [
 
 export const Nav: FC = () => {
   const router = useRouter();
-  console.log(router.pathname);
+
+  const isActive = (path: string): boolean => {
+    if (path === '/') {
+      return router.pathname === path || router.pathname.includes('/objects');
+    }
+    return router.pathname === path;
+  };
 
   return (
     <div className="h-full border-r">
@@ -31,7 +37,7 @@ export const Nav: FC = () => {
                   <a
                     className={`flex h-full items-center p-4 text-xl md:text-xl ${
                       styles.link
-                    } ${router.pathname === item.path ? styles.active : ''}`}
+                    } ${isActive(item.path) ? styles.active : ''}`}
                   >
                     {item.title}
                   </a>
