@@ -1,4 +1,4 @@
-import { ContentContainer } from 'components';
+import { ContentContainer } from '../../components';
 import { FC } from 'react';
 
 export const NothingFound: FC = () => {

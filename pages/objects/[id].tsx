@@ -1,17 +1,13 @@
-import { fetchAllObjectIds, fetchObject } from 'lib/api';
 import type { NextPage } from 'next';
-
+import { fetchAllObjectIds, fetchObject } from '../../lib/api';
 import {
   Aside,
-  ContentContainer,
   DetailImage,
   Heading,
   List,
-  ListItem,
   ObjectDetails,
   RichText,
-} from '../../components';
-// import { fetchObjectById } from '../../lib/api-calls';
+} from './../../components';
 import { DomainType, IObject, IRelatedItem } from '../../types';
 
 interface IPath {
@@ -78,15 +74,11 @@ export default Object;
 
 export async function getStaticPaths(): Promise<IGetStaticPathsProps> {
   const objectIds = await fetchAllObjectIds();
-
-  // const companies = await getCompanies();
   const paths = objectIds?.map(({ _id }) => ({
     params: {
       id: _id.toString(),
     },
   }));
-  // const paths = [{ params: { id: '41592' } }];
-
   return {
     paths,
     fallback: false,

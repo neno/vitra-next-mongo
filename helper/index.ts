@@ -1,6 +1,5 @@
-import { IListItem } from './../types/clientTypes';
-import { ListItem } from './../components/list-item/ListItem';
 import {
+  IListItem,
   IObjectItemServer,
   IObjectRelation,
   IObjectServer,
@@ -9,7 +8,6 @@ import {
   IObjectItem,
   PersonType,
 } from '../types';
-import { arrayBuffer } from 'stream/consumers';
 
 export function getAsString(value: string | string[]): string {
   if (Array.isArray(value)) {
@@ -66,7 +64,7 @@ export function mapDocumentToObject(doc: IObjectServer): IObject {
     dimensions: doc.ObjDimension ?? '',
     designed: doc.ObjDateGrp_DateFromTxt ?? '',
     firstProduction: doc.ObjDateGrp_Notes2Clb ?? '',
-    type: doc.ObjCategoryVoc,
+    type: doc.ObjCategoryVoc ?? '',
     inventoryNo: doc.ObjObjectNumberGrp_Part1Txt ?? '',
     description: doc.ObjMarkdown
       ? doc.ObjMarkdown.replace(/<br><br>/g, '<br>')

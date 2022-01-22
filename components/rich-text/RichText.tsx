@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import { ContentContainer } from 'components';
+import { ContentContainer } from '../../components';
 import { IRichTextProps } from './RichText.type';
 
 export const RichText: FC<IRichTextProps> = ({ text }) => {

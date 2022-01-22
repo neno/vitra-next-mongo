@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { IListItem } from 'types';
+import { IListItem } from '../types';
 
 export const useIntersect = () => {
   const loadMoreRef = useRef<HTMLDivElement>(null);

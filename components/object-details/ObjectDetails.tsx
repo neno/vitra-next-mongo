@@ -1,6 +1,6 @@
-import { ContentContainer, Icon } from 'components';
+import { ContentContainer, Icon } from '../../components';
 import { FC, Fragment, useState } from 'react';
-import { IconType } from 'types';
+import { IconType } from '../../types';
 import {
   IObjectDetailsProps,
   TObjectDefListFieldType,

@@ -1,7 +1,7 @@
-import { useScrollDirection } from 'hooks/use-scroll-direction';
 import { ChangeEvent, FC, FormEvent, useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 import { ContentContainer, Icon, NothingFound } from '..';
+import { useScrollDirection } from '../../hooks/use-scroll-direction';
 import { IconType, IListItem } from '../../types';
 import { ISearchFormProps } from './SearchForm.types';
 import styles from './SearchForm.module.css';
@@ -73,13 +73,16 @@ export const SearchForm: FC<ISearchFormProps> = ({
             placeholder="Search…"
             value={searchTerm}
             onChange={handleChange}
-            className="w-full h:12 md:h-14 text-2xl md:text-4xl leading-loose ml-2 mr-2"
+            className="w-full h:12 md:h-14 text-2xl md:text-4xl leading-loose ml-2 mr-2 p-2 focus:text-white focus:bg-black"
           />
-          {searchTerm && (
-            <button onClick={reset} className="flex" title="Clear search term">
-              <Icon iconName={IconType.Close} />
-            </button>
-          )}
+
+          <button
+            onClick={reset}
+            className={`flex ${!searchTerm ? 'invisible' : ''}`}
+            title="Clear search term"
+          >
+            <Icon iconName={IconType.Close} />
+          </button>
         </div>
       </ContentContainer>
       {showNothingFound && <NothingFound />}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { debounce } from 'lodash';
 
 type TScrollDirection = 'down' | 'up';
@@ -10,12 +10,12 @@ export const useScrollDirection = () => {
   const [scrollDirection, setScrollDirection] =
     useState<TScrollDirection>('down');
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const currentPageYOffset = windowRef.current.pageYOffset;
     const { current: lastPageYOffset } = pageOffsetRef;
     pageOffsetRef.current = currentPageYOffset;
 
-    if (Math.abs(currentPageYOffset - lastPageYOffset) < 10) return;
+    // if (Math.abs(currentPageYOffset - lastPageYOffset) < 10) return;
 
     if (currentPageYOffset > lastPageYOffset) {
       setScrollDirection('down');
@@ -23,19 +23,16 @@ export const useScrollDirection = () => {
       setScrollDirection('up');
     }
     setIsSticky(currentPageYOffset > 2 * 97);
-  };
-
-  const debouncedScrollHandler = debounce(handleScroll, 200);
+  }, []);
 
   useEffect(() => {
     windowRef.current = window;
     const { current: theWindow } = windowRef;
-    const scrollListener = theWindow.addEventListener(
-      'scroll',
-      debouncedScrollHandler
-    );
-    return () => theWindow.removeEventListener('scroll', scrollListener);
-  }, []);
+    theWindow.addEventListener('scroll', handleScroll);
+    return () => {
+      theWindow.removeEventListener('scroll', handleScroll);
+    };
+  }, [handleScroll]);
 
   return { scrollDirection, isSticky };
 };

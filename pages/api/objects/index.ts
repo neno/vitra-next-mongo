@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import createHandler from 'middleware';
-import { fetchObjectItems } from 'lib/api';
+import createHandler from '../../../middleware';
+import { fetchObjectItems } from '../../../lib/api';
 
 const handler = createHandler();
 

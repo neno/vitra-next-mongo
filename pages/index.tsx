@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
-import { useEffect, useRef, useState } from 'react';
-import { fetchObjectItems } from 'lib/api';
-import { fetchAutoCompleteObjects } from 'lib/client-api';
+import { useEffect, useState } from 'react';
+import { fetchObjectItems } from '../lib/api';
+import { fetchAutoCompleteObjects } from '../lib/client-api';
 import { SearchForm, PageHeader, List } from '../components';
 import { DomainType, IListItem } from '../types';
-import { splitArrayIntoEqualChunks } from 'helper';
-import { useIntersect } from 'hooks/use-intersect';
+import { splitArrayIntoEqualChunks } from '../helper';
+import { useIntersect } from '../hooks/use-intersect';
 
 interface IPageProps {
   chunkItems: IListItem[][];

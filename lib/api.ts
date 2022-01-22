@@ -1,6 +1,6 @@
-import { dbConnect } from 'middleware/db';
-import Object from 'models/object';
-import { mapDocumentToObject, mapObjectDocumentsToListItems } from 'helper';
+import { dbConnect } from '../middleware/db';
+import Object from '../models/object';
+import { mapDocumentToObject, mapObjectDocumentsToListItems } from '../helper';
 import { IListItem, IObject } from './../types/clientTypes';
 
 const objectItemProjection = {
