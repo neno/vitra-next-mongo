@@ -17,5 +17,5 @@ export enum IconType {
 export enum DomainType {
   Objects = 'objects',
   Designers = 'designers',
-  Manufacturers = 'Manufacturers',
+  Manufacturers = 'manufacturers',
 }

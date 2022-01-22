@@ -5,6 +5,7 @@ import { useScrollDirection } from '../../hooks/use-scroll-direction';
 import { IconType, IListItem } from '../../types';
 import { ISearchFormProps } from './SearchForm.types';
 import styles from './SearchForm.module.css';
+import { Circles, Rings } from 'svg-loaders-react';
 
 export const SearchForm: FC<ISearchFormProps> = ({
   searchFunction,
@@ -62,7 +63,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className={cssClass} ref={formRef}>
       <ContentContainer>
-        <div className="flex items-center mx-auto h-full">
+        <div className="flex relative items-center mx-auto h-full">
           <label className="sr-only" htmlFor="vitra-search">
             Find Objects
           </label>
@@ -73,9 +74,13 @@ export const SearchForm: FC<ISearchFormProps> = ({
             placeholder="Search…"
             value={searchTerm}
             onChange={handleChange}
-            className="w-full h:12 md:h-14 text-2xl md:text-4xl leading-loose ml-2 mr-2 p-2 focus:text-white focus:bg-black"
+            className="w-full h:12 md:h-14 text-2xl md:text-4xl leading-loose ml-2 p-2 mr-2 pr-12 focus:text-white focus:bg-black"
           />
-
+          {isLoading && (
+            <div className="absolute top-[50%] mt-[-23px] right-0 z-5000 translate-x-[-36px]">
+              <Rings fill="black" />
+            </div>
+          )}
           <button
             onClick={reset}
             className={`flex ${!searchTerm ? 'invisible' : ''}`}
