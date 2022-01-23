@@ -52,3 +52,54 @@ export interface ISingleRecordServerResponse {
 export interface IMultipleRecordsServerResponse {
   documents: unknown;
 }
+
+export interface IDesignerItemServer {
+  _id: number;
+  PerNameTxt?: string;
+  PerNameSortedTxt?: string;
+  PerDatingTxt?: string;
+  PerMultimediaRel?: {
+    [0]: {
+      MulUrl: string; // Image
+    };
+  };
+}
+export interface IManufacturerItemServer {
+  _id: number;
+  PerNameTxt?: string;
+  PerBirthPlaceCity?: string;
+  PerNationalityTxt?: string;
+  PerMultimediaRel?: {
+    [0]: {
+      MulUrl: string; // Image
+    };
+  };
+}
+
+export interface IPersonServer {
+  _id: number;
+  PerNameTxt?: string;
+  PerDatingTxt?: string;
+  PerNameSortedTxt: string;
+  PerTypeVoc: PersonType;
+  PerNationalityTxt: string;
+  PerMarkdown: string;
+  PerBirthPlaceCity: string;
+  PerBirthPlaceCountry: string;
+  PerDisplay: string;
+  PerFullText: string;
+  PerObjectRel?: IPersonObjectRelation[];
+  PerMultimediaRel?: {
+    [0]: {
+      MulUrl: string; // Image
+    };
+  };
+}
+
+export interface IPersonObjectRelation {
+  ObjId: number; // Id
+  ObjObjectTitleTxt?: string; // Title
+  ObjDateGrp_DateFromTxt?: string; // Dating
+  ObjDesigner?: string; // Designer
+  ObjUrl?: string; // Image
+}

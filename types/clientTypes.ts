@@ -1,3 +1,5 @@
+import { PersonType } from './enums';
+
 export interface IObjectItem {
   id: number;
   fullTitle: string;
@@ -36,3 +38,16 @@ export interface IListItem {
 }
 
 export type TSearchFunction = (term: string) => Promise<IListItem[]>;
+
+export interface IPerson {
+  id: number;
+  name: string;
+  nameSorted: string;
+  dating: string;
+  image: string | null;
+  place: string;
+  country: string;
+  type: PersonType;
+  text: string;
+  relatedObjects: IRelatedItem[];
+}

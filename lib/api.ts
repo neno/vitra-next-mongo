@@ -1,7 +1,14 @@
 import { dbConnect } from '../middleware/db';
 import Object from '../models/object';
-import { mapDocumentToObject, mapObjectDocumentsToListItems } from '../helper';
-import { IListItem, IObject } from './../types/clientTypes';
+import Person from '../models/person';
+import {
+  mapDesignerDocumentsToListItems,
+  mapDocumentToObject,
+  mapDocumentToPerson,
+  mapObjectDocumentsToListItems,
+} from '../helper';
+import { IListItem, IObject, IPerson } from './../types/clientTypes';
+import { PersonType } from 'types';
 
 const objectItemProjection = {
   _id: 1,
@@ -23,6 +30,14 @@ const objectProjection = {
   ObjObjectNumberGrp_Part1Txt: 1,
   ObjPersonRel: 1,
   ObjObjectRel: 1,
+};
+
+const designerItemProjection = {
+  _id: 1,
+  PerNameTxt: 1,
+  PerNameSortedTxt: 1,
+  PerDatingTxt: 1,
+  PerMultimediaRel: 1,
 };
 
 export async function fetchObjectItems(): Promise<IListItem[]> {
@@ -59,4 +74,55 @@ export async function autoCompleteObjects(q: string): Promise<IListItem[]> {
     .limit(10);
 
   return mapObjectDocumentsToListItems(objects);
+}
+
+export async function fetchDesignerItems(): Promise<IListItem[]> {
+  await dbConnect();
+  const designers = await Object.find(
+    { PerTypeVoc: PersonType.Designer },
+    objectItemProjection
+  ).exec();
+  return mapDesignerDocumentsToListItems(designers);
+}
+
+export async function fetchPerson(_id: string): Promise<IPerson> {
+  await dbConnect();
+  const person = await Object.findOne({ _id }, objectProjection).exec();
+  return mapDocumentToPerson(person);
+}
+
+export async function autoCompleteDesigners(q: string): Promise<IListItem[]> {
+  await dbConnect();
+  const designers = await Person.aggregate()
+    .search({
+      index: 'autoCompletePersons',
+      autocomplete: {
+        query: q,
+        path: 'PerFullText',
+      },
+    })
+    .match({ PerTypeVoc: PersonType.Designer })
+    .project(objectItemProjection)
+    .limit(10);
+
+  return mapObjectDocumentsToListItems(designers);
+}
+
+export async function autoCompleteManufacturers(
+  q: string
+): Promise<IListItem[]> {
+  await dbConnect();
+  const manufacturers = await Person.aggregate()
+    .search({
+      index: 'autoCompletePersons',
+      autocomplete: {
+        query: q,
+        path: 'PerFullText',
+      },
+    })
+    .match({ PerTypeVoc: PersonType.Manufacturer })
+    .project(objectItemProjection)
+    .limit(10);
+
+  return mapObjectDocumentsToListItems(manufacturers);
 }

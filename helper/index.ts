@@ -1,4 +1,9 @@
 import {
+  IDesignerItemServer,
+  IPersonServer,
+  IPersonObjectRelation,
+} from './../types/serverTypes';
+import {
   IListItem,
   IObjectItemServer,
   IObjectRelation,
@@ -7,6 +12,7 @@ import {
   IObject,
   IObjectItem,
   PersonType,
+  IPerson,
 } from '../types';
 
 export function getAsString(value: string | string[]): string {
@@ -122,4 +128,36 @@ export const splitArrayIntoEqualChunks = (
   }
 
   return res;
+};
+
+export const mapDesignerDocumentsToListItems = (
+  documents: IDesignerItemServer[]
+): IListItem[] => {
+  return documents.map((doc: IDesignerItemServer) => ({
+    id: doc._id,
+    title: doc?.PerNameSortedTxt ?? '',
+    text: doc?.PerDatingTxt ?? '',
+    image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? '',
+  }));
+};
+
+export const mapDocumentToPerson = (doc: IPersonServer): IPerson => {
+  return {
+    id: doc._id,
+    name: doc.PerNameTxt ?? '',
+    nameSorted: doc.PerNameSortedTxt ?? '',
+    dating: doc.PerDatingTxt ?? '',
+    image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? null,
+    place: doc.PerBirthPlaceCity ?? '',
+    country: doc.PerBirthPlaceCountry ?? '',
+    type: doc.PerTypeVoc,
+    text: doc.PerMarkdown ?? '',
+    relatedObjects:
+      doc.PerObjectRel?.map((obj: IPersonObjectRelation) => ({
+        id: obj.ObjId,
+        title: obj.ObjObjectTitleTxt ?? '',
+        text: obj.ObjDesigner ?? '',
+        image: obj.ObjUrl ?? null,
+      })) ?? [],
+  };
 };

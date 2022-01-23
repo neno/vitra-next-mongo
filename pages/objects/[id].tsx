@@ -55,14 +55,14 @@ const Object: NextPage<IPageProps> = ({ object }) => {
       )}
       {object.relatedDesigners.length > 0 && (
         <Aside title="Designers">
-          <List items={object.relatedDesigners} domain={DomainType.Objects} />
+          <List items={object.relatedDesigners} domain={DomainType.Designers} />
         </Aside>
       )}
       {object.relatedManufacturers.length > 0 && (
         <Aside title="Manufacturer">
           <List
             items={object.relatedManufacturers}
-            domain={DomainType.Objects}
+            domain={DomainType.Manufacturers}
           />
         </Aside>
       )}
