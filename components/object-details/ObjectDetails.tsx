@@ -8,7 +8,6 @@ import {
 
 const fieldsOrder: TObjectDefListFieldType[] = [
   'title',
-  'subTitle',
   'designer',
   'type',
   'designed',

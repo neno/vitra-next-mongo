@@ -33,7 +33,6 @@ const Object: NextPage<IPageProps> = ({ object }) => {
       <ObjectDetails
         fields={{
           title: object.title,
-          subTitle: object.subTitle,
           designed: object.designed,
           designer: object.designer,
           type: object.type,
