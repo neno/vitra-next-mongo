@@ -2,6 +2,7 @@ import {
   IDesignerItemServer,
   IPersonServer,
   IPersonObjectRelation,
+  IManufacturerItemServer,
 } from './../types/serverTypes';
 import {
   IListItem,
@@ -130,6 +131,10 @@ export const splitArrayIntoEqualChunks = (
   return res;
 };
 
+export const createCommaSeparatedString = (...items: string[]): string => {
+  return items.filter((item: string) => item).join(', ');
+};
+
 export const mapDesignerDocumentsToListItems = (
   documents: IDesignerItemServer[]
 ): IListItem[] => {
@@ -137,6 +142,22 @@ export const mapDesignerDocumentsToListItems = (
     id: doc._id,
     title: doc?.PerNameSortedTxt ?? '',
     text: doc?.PerDatingTxt ?? '',
+    image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? '',
+  }));
+};
+
+export const mapManufacturerDocumentsToListItems = (
+  documents: IManufacturerItemServer[]
+): IListItem[] => {
+  console.log(documents[0]);
+
+  return documents.map((doc: IManufacturerItemServer) => ({
+    id: doc._id,
+    title: doc?.PerNameTxt ?? '',
+    text: createCommaSeparatedString(
+      doc.PerBirthPlaceCity ?? '',
+      doc.PerNationalityTxt ?? ''
+    ),
     image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? '',
   }));
 };

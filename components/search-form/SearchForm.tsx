@@ -10,6 +10,7 @@ import { Circles, Rings } from 'svg-loaders-react';
 export const SearchForm: FC<ISearchFormProps> = ({
   searchFunction,
   setSearchItems,
+  placeholder,
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -71,7 +72,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
           <input
             id="vitra-search"
             type="text"
-            placeholder="Search…"
+            placeholder={placeholder}
             value={searchTerm}
             onChange={handleChange}
             className="w-full h:12 md:h-14 text-2xl md:text-4xl leading-loose ml-2 p-2 mr-2 pr-12 focus:text-white focus:bg-black"

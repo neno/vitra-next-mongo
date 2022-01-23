@@ -5,10 +5,10 @@ import {
   mapDesignerDocumentsToListItems,
   mapDocumentToObject,
   mapDocumentToPerson,
+  mapManufacturerDocumentsToListItems,
   mapObjectDocumentsToListItems,
 } from '../helper';
-import { IListItem, IObject, IPerson } from './../types/clientTypes';
-import { PersonType } from 'types';
+import { IListItem, IObject, IPerson, PersonType } from './../types';
 
 const objectItemProjection = {
   _id: 1,
@@ -34,9 +34,16 @@ const objectProjection = {
 
 const designerItemProjection = {
   _id: 1,
-  PerNameTxt: 1,
   PerNameSortedTxt: 1,
   PerDatingTxt: 1,
+  PerMultimediaRel: 1,
+};
+
+const manufacturerItemProjection = {
+  _id: 1,
+  PerNameTxt: 1,
+  PerBirthPlaceCity: 1,
+  PerNationalityTxt: 1,
   PerMultimediaRel: 1,
 };
 
@@ -78,11 +85,20 @@ export async function autoCompleteObjects(q: string): Promise<IListItem[]> {
 
 export async function fetchDesignerItems(): Promise<IListItem[]> {
   await dbConnect();
-  const designers = await Object.find(
+  const designers = await Person.find(
     { PerTypeVoc: PersonType.Designer },
-    objectItemProjection
+    designerItemProjection
   ).exec();
   return mapDesignerDocumentsToListItems(designers);
+}
+
+export async function fetchManufacturerItems(): Promise<IListItem[]> {
+  await dbConnect();
+  const manufacturers = await Person.find(
+    { PerTypeVoc: PersonType.Manufacturer },
+    manufacturerItemProjection
+  ).exec();
+  return mapManufacturerDocumentsToListItems(manufacturers);
 }
 
 export async function fetchPerson(_id: string): Promise<IPerson> {

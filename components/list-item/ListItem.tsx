@@ -8,6 +8,7 @@ import { IListItemProps } from './ListItem.type';
 export const ListItem: FC<IListItemProps> = ({
   item: { id, image, title, text },
   domain,
+  showImage = true,
 }) => {
   const itemPath = useMemo(() => {
     return `/${domain}/${id}`;
@@ -16,22 +17,25 @@ export const ListItem: FC<IListItemProps> = ({
   return (
     <div className="relative">
       <ContentContainer>
-        <article className="flex items-center">
-          <div className="flex-0 w-20 md:w-24 h-20 md:h-24">
-            {image && (
-              <Link href={itemPath}>
-                <a>
-                  <Image
-                    src={image}
-                    width={96}
-                    height={96}
-                    alt={title}
-                    objectFit="contain"
-                  />
-                </a>
-              </Link>
-            )}
-          </div>
+        <article className="flex items-center h-[96px]">
+          {showImage && (
+            <div className="flex-0 w-20 md:w-24 h-20 md:h-24 relative">
+              {image && (
+                <Link href={itemPath}>
+                  <a>
+                    <Image
+                      src={image}
+                      width={96}
+                      height={96}
+                      alt={title}
+                      objectFit="cover"
+                      layout="fill"
+                    />
+                  </a>
+                </Link>
+              )}
+            </div>
+          )}
           <div className="flex-1 ml-4">
             <Link href={itemPath}>
               <a>
