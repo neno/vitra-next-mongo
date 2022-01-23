@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { fetchManufacturerItems } from '../../lib/api';
-import { fetchAutoCompleteObjects } from '../../lib/client-api';
+import { fetchAutoCompleteManufacturers } from '../../lib/client-api';
 import { SearchForm, PageHeader, List } from '../../components';
 import { DomainType, IListItem } from '../../types';
 import { splitArrayIntoEqualChunks } from '../../helper';
@@ -26,7 +26,7 @@ const ManufacturersPage: NextPage<IPageProps> = ({ chunkItems, total }) => {
     <>
       <PageHeader>Manufacturers</PageHeader>
       <SearchForm
-        searchFunction={fetchAutoCompleteObjects}
+        searchFunction={fetchAutoCompleteManufacturers}
         setSearchItems={setSearchItems}
         placeholder={`Search in ${total} manufacturers`}
       />

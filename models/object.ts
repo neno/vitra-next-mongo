@@ -8,7 +8,6 @@ const DBCollection = 'objects';
 const schema = new Schema<IObjectServer>({
   _id: Number,
   ObjObjectTitleTxt: String,
-  ObjObjectTitleSubTxt: String,
   ObjDateGrp_DateFromTxt: String,
   ObjDesigner: String,
   ObjHighlight: String,

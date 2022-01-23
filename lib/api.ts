@@ -13,7 +13,6 @@ import { IListItem, IObject, IPerson, PersonType } from './../types';
 const objectItemProjection = {
   _id: 1,
   ObjObjectTitleTxt: 1,
-  ObjObjectTitleSubTxt: 1,
   ObjDateGrp_DateFromTxt: 1,
   ObjDesigner: 1,
   ObjMultimediaRel: 1,
@@ -49,7 +48,9 @@ const manufacturerItemProjection = {
 
 export async function fetchObjectItems(): Promise<IListItem[]> {
   await dbConnect();
-  const objects = await Object.find({}, objectItemProjection).exec();
+  const objects = await Object.find({}, objectItemProjection)
+    .sort({ ObjObjectTitleTxt: 1, ObjDateGrp_DateFromTxt: 1, ObjDesigner: 1 })
+    .exec();
   return mapObjectDocumentsToListItems(objects);
 }
 
@@ -78,6 +79,7 @@ export async function autoCompleteObjects(q: string): Promise<IListItem[]> {
       },
     })
     .project(objectItemProjection)
+    .sort({ ObjObjectTitleTxt: 1, ObjDateGrp_DateFromTxt: 1, ObjDesigner: 1 })
     .limit(10);
 
   return mapObjectDocumentsToListItems(objects);
@@ -88,7 +90,9 @@ export async function fetchDesignerItems(): Promise<IListItem[]> {
   const designers = await Person.find(
     { PerTypeVoc: PersonType.Designer },
     designerItemProjection
-  ).exec();
+  )
+    .sort({ PerNameSortedTxt: 1 })
+    .exec();
   return mapDesignerDocumentsToListItems(designers);
 }
 
@@ -97,7 +101,9 @@ export async function fetchManufacturerItems(): Promise<IListItem[]> {
   const manufacturers = await Person.find(
     { PerTypeVoc: PersonType.Manufacturer },
     manufacturerItemProjection
-  ).exec();
+  )
+    .sort({ PerNameSortedTxt: 1 })
+    .exec();
   return mapManufacturerDocumentsToListItems(manufacturers);
 }
 
@@ -118,10 +124,11 @@ export async function autoCompleteDesigners(q: string): Promise<IListItem[]> {
       },
     })
     .match({ PerTypeVoc: PersonType.Designer })
-    .project(objectItemProjection)
+    .sort({ PerNameSortedTxt: 1 })
+    .project(designerItemProjection)
     .limit(10);
 
-  return mapObjectDocumentsToListItems(designers);
+  return mapDesignerDocumentsToListItems(designers);
 }
 
 export async function autoCompleteManufacturers(
@@ -137,8 +144,9 @@ export async function autoCompleteManufacturers(
       },
     })
     .match({ PerTypeVoc: PersonType.Manufacturer })
-    .project(objectItemProjection)
+    .sort({ PerNameSortedTxt: 1 })
+    .project(manufacturerItemProjection)
     .limit(10);
 
-  return mapObjectDocumentsToListItems(manufacturers);
+  return mapManufacturerDocumentsToListItems(manufacturers);
 }

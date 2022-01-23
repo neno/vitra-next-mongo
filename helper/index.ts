@@ -23,14 +23,30 @@ export function getAsString(value: string | string[]): string {
   return value;
 }
 
+export const splitArrayIntoEqualChunks = (
+  arr: any[],
+  size: number
+): any[] | any[][] => {
+  const res: any[][] = [];
+  while (arr.length > 0) {
+    const chunk = arr.splice(0, size);
+    res.push(chunk);
+  }
+
+  return res;
+};
+
+export const createCommaSeparatedString = (...items: string[]): string => {
+  return items.filter((item: string) => item).join(', ');
+};
+
 export const mapDocumentsToObjectItems = (
   documents: IObjectItemServer[]
 ): IObjectItem[] => {
   return documents.map((doc: IObjectItemServer) => ({
     id: doc._id,
-    fullTitle: createTitleString(
+    fullTitle: createCommaSeparatedString(
       doc?.ObjObjectTitleTxt ?? '',
-      doc?.ObjObjectTitleSubTxt ?? '',
       doc?.ObjDateGrp_DateFromTxt ?? ''
     ),
     designer: doc?.ObjDesigner ?? '',
@@ -44,9 +60,8 @@ export const mapObjectDocumentsToListItems = (
 ): IListItem[] => {
   return documents.map((doc: IObjectItemServer) => ({
     id: doc._id,
-    title: createTitleString(
+    title: createCommaSeparatedString(
       doc?.ObjObjectTitleTxt ?? '',
-      doc?.ObjObjectTitleSubTxt ?? '',
       doc?.ObjDateGrp_DateFromTxt ?? ''
     ),
     text: doc?.ObjDesigner ?? '',
@@ -57,13 +72,11 @@ export const mapObjectDocumentsToListItems = (
 export function mapDocumentToObject(doc: IObjectServer): IObject {
   return {
     id: doc._id,
-    fullTitle: createTitleString(
+    fullTitle: createCommaSeparatedString(
       doc?.ObjObjectTitleTxt ?? '',
-      doc?.ObjObjectTitleSubTxt ?? '',
       doc?.ObjDateGrp_DateFromTxt ?? ''
     ),
     title: doc?.ObjObjectTitleTxt ?? '',
-    subTitle: doc?.ObjObjectTitleSubTxt ?? '',
     dating: doc?.ObjDateTxt ?? '',
     designer: doc?.ObjDesigner ?? '',
     image: doc?.ObjMultimediaRel?.[0]?.MulUrl ?? null,
@@ -79,9 +92,8 @@ export function mapDocumentToObject(doc: IObjectServer): IObject {
     relatedObjects:
       doc.ObjObjectRel?.map((obj: IObjectRelation) => ({
         id: obj.ObjId,
-        title: createTitleString(
+        title: createCommaSeparatedString(
           obj.ObjObjectTitleTxt ?? '',
-          obj.ObjObjectTitleSubTxt ?? '',
           obj.ObjDateGrp_DateFromTxt ?? ''
         ),
         text: obj.ObjDesigner ?? '',
@@ -108,32 +120,6 @@ export function mapDocumentToObject(doc: IObjectServer): IObject {
       })) ?? [],
   };
 }
-
-export const createTitleString = (
-  title: string,
-  subTitle: string,
-  designed: string
-): string => {
-  const str = `${title} ${subTitle}`.trim();
-  return str ? `${str}, ${designed}` : designed;
-};
-
-export const splitArrayIntoEqualChunks = (
-  arr: any[],
-  size: number
-): any[] | any[][] => {
-  const res: any[][] = [];
-  while (arr.length > 0) {
-    const chunk = arr.splice(0, size);
-    res.push(chunk);
-  }
-
-  return res;
-};
-
-export const createCommaSeparatedString = (...items: string[]): string => {
-  return items.filter((item: string) => item).join(', ');
-};
 
 export const mapDesignerDocumentsToListItems = (
   documents: IDesignerItemServer[]

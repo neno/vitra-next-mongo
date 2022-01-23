@@ -5,7 +5,6 @@ export type TDbCollection = 'objects' | 'contents' | 'persons';
 export interface IObjectItemServer {
   _id: number;
   ObjObjectTitleTxt?: string; // Title
-  ObjObjectTitleSubTxt?: string; // Subtitle
   ObjDateGrp_DateFromTxt?: string; // Designed / Entwurfsdatum
   ObjDesigner?: string; // Designer
   ObjHighlight?: string; // ?

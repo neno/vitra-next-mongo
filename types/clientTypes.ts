@@ -9,7 +9,6 @@ export interface IObjectItem {
 
 export interface IObject extends IObjectItem {
   title: string;
-  subTitle: string;
   designed: string;
   material: string;
   dimensions: string;
