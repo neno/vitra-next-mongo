@@ -16,7 +16,7 @@ const ManufacturersPage: NextPage<IPageProps> = ({ chunkItems, total }) => {
   const [searchItems, setSearchItems] = useState<IListItem[] | null>(null);
   const { items, remainingItemsRef, loadMoreRef, setDoObserve } =
     useIntersect();
-  remainingItemsRef.current = chunkItems;
+  remainingItemsRef.current = [...chunkItems];
 
   useEffect(() => {
     setDoObserve(!searchItems);
