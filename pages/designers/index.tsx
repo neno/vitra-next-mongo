@@ -24,7 +24,7 @@ const DesignersPage: NextPage<IPageProps> = ({ chunkItems, total }) => {
 
   return (
     <>
-      <PageHeader>Designers</PageHeader>
+      <PageHeader>Listing Designers</PageHeader>
       <SearchForm
         searchFunction={fetchAutoCompleteDesigners}
         setSearchItems={setSearchItems}

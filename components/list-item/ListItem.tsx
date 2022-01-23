@@ -2,7 +2,7 @@ import { FC, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ContentContainer, Icon } from '..';
-import { IconType } from '../../types';
+import { DomainType, IconType } from '../../types';
 import { IListItemProps } from './ListItem.type';
 
 export const ListItem: FC<IListItemProps> = ({
@@ -28,7 +28,9 @@ export const ListItem: FC<IListItemProps> = ({
                       width={96}
                       height={96}
                       alt={title}
-                      objectFit="cover"
+                      objectFit={
+                        domain === DomainType.Objects ? 'contain' : 'cover'
+                      }
                       layout="fill"
                     />
                   </a>
