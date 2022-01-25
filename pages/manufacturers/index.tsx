@@ -28,7 +28,7 @@ const ManufacturersPage: NextPage<IPageProps> = ({ chunkItems, total }) => {
       <SearchForm
         searchFunction={fetchAutoCompleteManufacturers}
         setSearchItems={setSearchItems}
-        placeholder={`Search in ${total} manufacturers`}
+        placeholder={`Search among ${total} manufacturers`}
       />
       {searchItems && (
         <List

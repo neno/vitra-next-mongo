@@ -28,7 +28,7 @@ const HomePage: NextPage<IPageProps> = ({ chunkItems, total }) => {
       <SearchForm
         searchFunction={fetchAutoCompleteObjects}
         setSearchItems={setSearchItems}
-        placeholder={`Search in ${total} objects…`}
+        placeholder={`Search among ${total} objects…`}
       />
       {searchItems && <List items={searchItems} domain={DomainType.Objects} />}
       {items && items.length && (

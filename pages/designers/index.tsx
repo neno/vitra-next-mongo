@@ -28,7 +28,7 @@ const DesignersPage: NextPage<IPageProps> = ({ chunkItems, total }) => {
       <SearchForm
         searchFunction={fetchAutoCompleteDesigners}
         setSearchItems={setSearchItems}
-        placeholder={`Search in ${total} designers`}
+        placeholder={`Search among ${total} designers`}
       />
       {searchItems && (
         <List items={searchItems} domain={DomainType.Designers} />
