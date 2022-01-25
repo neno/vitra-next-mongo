@@ -4,6 +4,7 @@ import '../public/fonts/fonts.css';
 import 'tailwindcss/tailwind.css';
 import '../styles/global.css';
 import { Layout } from '../components';
+import { VitraProvider } from '../context/VitraContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,11 +16,13 @@ const queryClient = new QueryClient({
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </QueryClientProvider>
+    <VitraProvider>
+      <QueryClientProvider client={queryClient}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </QueryClientProvider>
+    </VitraProvider>
   );
 }
 

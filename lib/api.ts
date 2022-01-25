@@ -46,6 +46,37 @@ const manufacturerItemProjection = {
   PerMultimediaRel: 1,
 };
 
+//   id: doc._id,
+//   name: doc.PerNameTxt ?? '',
+//   nameSorted: doc.PerNameSortedTxt ?? '',
+//   dating: doc.PerDatingTxt ?? '',
+//   image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? null,
+//   place: doc.PerBirthPlaceCity ?? '',
+//   country: doc.PerBirthPlaceCountry ?? '',
+//   type: doc.PerTypeVoc,
+//   text: doc.PerMarkdown ?? '',
+//   relatedObjects:
+//     doc.PerObjectRel?.map((obj: IPersonObjectRelation) => ({
+//       id: obj.ObjId,
+//       title: obj.ObjObjectTitleTxt ?? '',
+//       text: obj.ObjDesigner ?? '',
+//       image: obj.ObjUrl ?? null,
+//     })) ?? [],
+// };
+
+const personProjection = {
+  _id: 1,
+  PerTypeVoc: 1,
+  PerNameTxt: 1,
+  PerNameSortedTxt: 1,
+  PerDatingTxt: 1,
+  PerBirthPlaceCity: 1,
+  PerNationalityTxt: 1,
+  PerMultimediaRel: 1,
+  PerMarkdown: 1,
+  PerObjectRel: 1,
+};
+
 export async function fetchObjectItems(): Promise<IListItem[]> {
   await dbConnect();
   const objects = await Object.find({}, objectItemProjection)
@@ -63,7 +94,6 @@ export async function fetchObject(_id: string): Promise<IObject> {
 export async function fetchAllObjectIds(): Promise<{ _id: string }[]> {
   await dbConnect();
   const objects = await Object.find({}, { _id: 1 }).exec();
-  console.log(objects);
 
   return objects;
 }
@@ -107,9 +137,10 @@ export async function fetchManufacturerItems(): Promise<IListItem[]> {
   return mapManufacturerDocumentsToListItems(manufacturers);
 }
 
-export async function fetchPerson(_id: string): Promise<IPerson> {
+export async function fetchPerson(_id: string): Promise<any> {
   await dbConnect();
-  const person = await Object.findOne({ _id }, objectProjection).exec();
+  const person = await Person.findOne({ _id }, personProjection).exec();
+
   return mapDocumentToPerson(person);
 }
 
@@ -149,4 +180,24 @@ export async function autoCompleteManufacturers(
     .limit(10);
 
   return mapManufacturerDocumentsToListItems(manufacturers);
+}
+
+export async function fetchAllDesignerIds(): Promise<{ _id: string }[]> {
+  await dbConnect();
+  const designerIds = await Person.find(
+    { PerVocType: PersonType.Designer },
+    { _id: 1 }
+  ).exec();
+
+  return designerIds;
+}
+
+export async function fetchAllManufacturerIds(): Promise<{ _id: string }[]> {
+  await dbConnect();
+  const manufacturerIds = await Person.find(
+    { PerVocType: PersonType.Manufacturer },
+    { _id: 1 }
+  ).exec();
+
+  return manufacturerIds;
 }

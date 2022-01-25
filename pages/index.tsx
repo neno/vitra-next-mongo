@@ -6,7 +6,6 @@ import { SearchForm, PageHeader, List } from '../components';
 import { DomainType, IListItem } from '../types';
 import { splitArrayIntoEqualChunks } from '../helper';
 import { useIntersect } from '../hooks/use-intersect';
-
 interface IPageProps {
   chunkItems: IListItem[][];
   total: number;
@@ -14,9 +13,7 @@ interface IPageProps {
 
 const HomePage: NextPage<IPageProps> = ({ chunkItems, total }) => {
   const [searchItems, setSearchItems] = useState<IListItem[] | null>(null);
-  const { items, remainingItemsRef, loadMoreRef, setDoObserve } =
-    useIntersect();
-  remainingItemsRef.current = [...chunkItems];
+  const { items, loadMoreRef, setDoObserve } = useIntersect(chunkItems);
 
   useEffect(() => {
     setDoObserve(!searchItems);

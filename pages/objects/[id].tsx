@@ -7,8 +7,11 @@ import {
   List,
   ObjectDetails,
   RichText,
+  Toolbar,
 } from './../../components';
-import { DomainType, IObject, IRelatedItem } from '../../types';
+import { DomainType, IObject } from '../../types';
+import { useFavorites } from '../../hooks/useFavorites';
+import { mapObjectToListItem } from '../../helper';
 
 interface IPath {
   params: { id: string };
@@ -24,12 +27,21 @@ interface IPageProps {
 }
 
 const Object: NextPage<IPageProps> = ({ object }) => {
+  const { toggleFavorite, isFavorite } = useFavorites();
+  const onToggleFavorite = () => {
+    toggleFavorite(mapObjectToListItem(object), DomainType.Objects);
+  };
+
   return (
     <div className="pb-16">
       {object.image && <DetailImage src={object.image} alt={object.title} />}
 
       <Heading title={object.fullTitle} designer={object.designer} />
-
+      <Toolbar
+        prevUrl="/"
+        onToggleFavorite={onToggleFavorite}
+        isFavorite={isFavorite(object.id, DomainType.Objects)}
+      />
       <ObjectDetails
         fields={{
           title: object.title,

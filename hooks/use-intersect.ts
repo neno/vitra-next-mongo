@@ -1,17 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { IListItem } from '../types';
 
-export const useIntersect = () => {
+export const useIntersect = (chunkItems: IListItem[][]) => {
   const loadMoreRef = useRef<HTMLDivElement>(null);
   const observer = useRef<IntersectionObserver | null>(null);
-  const remainingItemsRef = useRef<IListItem[][]>([]);
+  const remainingItemsRef = useRef<IListItem[][]>(chunkItems);
   const [items, setItems] = useState<IListItem[]>([]);
   const [doObserve, setDoObserve] = useState(true);
 
   const addMoreItems = useCallback(() => {
-    const { current: remainingItems } = remainingItemsRef;
-    if (remainingItems.length > 0) {
-      const [chunk] = remainingItems.splice(0, 1);
+    if (remainingItemsRef.current.length > 0) {
+      const chunk = remainingItemsRef.current.splice(0, 1).flat();
+      console.log('chunk', chunk);
       setItems([...items, ...chunk]);
     }
   }, [items]);
@@ -43,5 +43,5 @@ export const useIntersect = () => {
     return () => currentObserver.disconnect();
   }, [onIntersect]);
 
-  return { items, remainingItemsRef, loadMoreRef, setDoObserve };
+  return { items, loadMoreRef, setDoObserve };
 };

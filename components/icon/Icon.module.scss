@@ -8,13 +8,15 @@
     width: 100%;
 
     path,
-    polyline {
+    polyline,
+    polygon {
       fill: currentColor;
     }
 
     &--use-stroke {
       path,
-      polyline {
+      polyline,
+      polygon {
         fill: none;
         stroke: currentColor;
       }

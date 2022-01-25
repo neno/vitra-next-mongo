@@ -135,8 +135,6 @@ export const mapDesignerDocumentsToListItems = (
 export const mapManufacturerDocumentsToListItems = (
   documents: IManufacturerItemServer[]
 ): IListItem[] => {
-  console.log(documents[0]);
-
   return documents.map((doc: IManufacturerItemServer) => ({
     id: doc._id,
     title: doc?.PerNameTxt ?? '',
@@ -168,3 +166,24 @@ export const mapDocumentToPerson = (doc: IPersonServer): IPerson => {
       })) ?? [],
   };
 };
+
+export const mapObjectToListItem = (obj: IObject): IListItem => ({
+  id: obj.id,
+  title: createCommaSeparatedString(obj.title, obj.dating),
+  text: obj.designer,
+  image: obj.image,
+});
+
+export const mapDesignerToListItem = (person: IPerson): IListItem => ({
+  id: person.id,
+  title: person.nameSorted,
+  text: person.dating,
+  image: person.image,
+});
+
+export const mapManufacturerToListItem = (person: IPerson): IListItem => ({
+  id: person.id,
+  title: person.name,
+  text: createCommaSeparatedString(person.place, person.country),
+  image: person.image,
+});

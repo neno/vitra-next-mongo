@@ -5,7 +5,9 @@ export enum PersonType {
 
 export enum IconType {
   Close = 'Close',
+  Collection = 'Collection',
   Down = 'Down',
+  Highlight = 'Highlight',
   Logo = 'Logo',
   Menu = 'Menu',
   Next = 'Next',

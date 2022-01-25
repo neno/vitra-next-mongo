@@ -14,9 +14,7 @@ interface IPageProps {
 
 const DesignersPage: NextPage<IPageProps> = ({ chunkItems, total }) => {
   const [searchItems, setSearchItems] = useState<IListItem[] | null>(null);
-  const { items, remainingItemsRef, loadMoreRef, setDoObserve } =
-    useIntersect();
-  remainingItemsRef.current = [...chunkItems];
+  const { items, loadMoreRef, setDoObserve } = useIntersect(chunkItems);
 
   useEffect(() => {
     setDoObserve(!searchItems);

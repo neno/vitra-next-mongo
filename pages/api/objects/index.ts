@@ -6,10 +6,7 @@ const handler = createHandler();
 
 handler.get(async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    console.log('fetchObjectItems');
-
     const objects = await fetchObjectItems();
-    console.log('fetchObjectItems', objects);
     res.status(200).json(objects);
   } catch (error: any) {
     res

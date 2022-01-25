@@ -17,16 +17,16 @@ export const ListItem: FC<IListItemProps> = ({
   return (
     <div className="relative">
       <ContentContainer>
-        <article className="flex items-center h-[96px]">
+        <article className="flex items-center h-[96px] overflow-hidden">
           {showImage && (
             <div className="flex-0 w-20 md:w-24 h-20 md:h-24 relative">
               {image && (
                 <Link href={itemPath}>
-                  <a>
+                  <a className="block relative h-full w-full">
                     <Image
                       src={image}
-                      width={96}
-                      height={96}
+                      // width={96}
+                      // height={96}
                       alt={title}
                       objectFit={
                         domain === DomainType.Objects ? 'contain' : 'cover'

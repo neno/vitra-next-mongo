@@ -1,12 +1,25 @@
 import { FC } from 'react';
 import { IconType } from '../../types';
 import { IIconProps } from './Icon.types';
-import { Close, Down, Logo, Menu, Next, Prev, Search, Up } from './icons';
+import {
+  Close,
+  Collection,
+  Down,
+  Highlight,
+  Logo,
+  Menu,
+  Next,
+  Prev,
+  Search,
+  Up,
+} from './icons';
 import styles from './Icon.module.scss';
 
 const icons = {
   [IconType.Close]: Close,
+  [IconType.Collection]: Collection,
   [IconType.Down]: Down,
+  [IconType.Highlight]: Highlight,
   [IconType.Logo]: Logo,
   [IconType.Menu]: Menu,
   [IconType.Next]: Next,

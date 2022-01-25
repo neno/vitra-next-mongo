@@ -7,11 +7,9 @@ const handler = createHandler();
 
 handler.post(async (req: NextApiRequest, res: NextApiResponse) => {
   const q = req.body;
-  console.log('q', q);
 
   try {
     const designers: IListItem[] = await autoCompleteDesigners(q);
-    console.log('designers', designers);
 
     res.status(200).json(designers.map((designer) => designer));
   } catch (error: any) {
