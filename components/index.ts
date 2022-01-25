@@ -13,7 +13,6 @@ export * from './list';
 export * from './nothing-found';
 export * from './rich-text';
 export * from './aside';
-export * from './person-image';
 export * from './toolbar';
 export * from './hover-button';
 export * from './list-item-skeleton';

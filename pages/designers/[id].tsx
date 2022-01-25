@@ -2,13 +2,13 @@ import type { NextPage } from 'next';
 import { fetchAllDesignerIds, fetchPerson } from '../../lib/api';
 import {
   Aside,
+  DetailImage,
   Heading,
   List,
-  PersonImage,
   RichText,
   Toolbar,
 } from './../../components';
-import { DomainType, IPerson, IRelatedItem } from '../../types';
+import { DomainType, IPerson } from '../../types';
 import { useFavorites } from '../../hooks/useFavorites';
 import { mapDesignerToListItem } from '../../helper';
 
@@ -33,7 +33,7 @@ const Designer: NextPage<IPageProps> = ({ person }) => {
 
   return (
     <div className="pb-16">
-      {person.image && <PersonImage src={person.image} alt={person.name} />}
+      {person.image && <DetailImage src={person.image} alt={person.name} />}
 
       <Heading title={person.name} designer={person.dating} />
 
