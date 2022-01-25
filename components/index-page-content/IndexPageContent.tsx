@@ -77,10 +77,7 @@ export const IndexPageContent = ({
         />
       )}
       {listItems.length > 0 && (
-        <div
-          className="mt-[-1px]"
-          style={hideListItems ? { display: 'none' } : {}}
-        >
+        <div className={`mt-[-1px] ${hideListItems && 'hidden'}`}>
           <List
             items={listItems}
             domain={domain}

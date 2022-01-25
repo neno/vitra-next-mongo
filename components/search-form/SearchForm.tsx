@@ -82,11 +82,13 @@ export const SearchForm: FC<ISearchFormProps> = ({
             onChange={handleChange}
             className="w-full h:12 md:h-14 text-2xl md:text-4xl leading-loose ml-2 p-2 mr-2 pr-12 focus:text-white focus:bg-black"
           />
-          {isLoading && (
-            <div className="absolute top-[50%] mt-[-19px] right-2 z-5000 translate-x-[-36px]">
-              <TailSpin />
-            </div>
-          )}
+          <div
+            className={`absolute top-[50%] mt-[-19px] right-2 z-5000 translate-x-[-36px] ${
+              !isLoading && 'hidden'
+            }`}
+          >
+            <TailSpin />
+          </div>
           <button
             onClick={reset}
             className={`flex ${!searchTerm ? 'invisible' : ''}`}
