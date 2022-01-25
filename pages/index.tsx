@@ -5,7 +5,7 @@ import { SearchForm, PageHeader, List, Layout } from '../components';
 import { DomainType, IListItem } from '../types';
 import { splitArrayIntoEqualChunks } from '../helper';
 import { useIntersect } from '../hooks/use-intersect';
-import { useObjectsData } from '../context/ObjectsContext';
+import { useObjectsData } from '../context';
 interface IPageProps {
   chunkItems: IListItem[][];
   totalCount: number;

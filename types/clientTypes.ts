@@ -60,7 +60,7 @@ export interface IDomainData {
   listItems: IListItem[];
 }
 
-export interface IObjectContextProps extends IDomainData {
+export interface IDomainContextProps extends IDomainData {
   setData: (values: IListItem[][]) => void;
   setTotalCount: (value: number) => void;
   setSearchTerm: (term: string) => void;
