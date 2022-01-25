@@ -155,7 +155,7 @@ export const mapDocumentToPerson = (doc: IPersonServer): IPerson => {
     image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? null,
     place: doc.PerBirthPlaceCity ?? '',
     country: doc.PerBirthPlaceCountry ?? '',
-    type: doc.PerTypeVoc,
+    type: doc.PerTypeVoc ?? '',
     text: doc.PerMarkdown ?? '',
     relatedObjects:
       doc.PerObjectRel?.map((obj: IPersonObjectRelation) => ({

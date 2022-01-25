@@ -1,4 +1,4 @@
-import { IListItem } from 'types';
+import { IListItem } from '../types';
 
 export interface IVitraData {
   favorites: {

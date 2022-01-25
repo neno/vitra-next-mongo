@@ -11,7 +11,6 @@ export const useIntersect = (chunkItems: IListItem[][]) => {
   const addMoreItems = useCallback(() => {
     if (remainingItemsRef.current.length > 0) {
       const chunk = remainingItemsRef.current.splice(0, 1).flat();
-      console.log('chunk', chunk);
       setItems([...items, ...chunk]);
     }
   }, [items]);
