@@ -25,8 +25,6 @@ export const ListItem: FC<IListItemProps> = ({
                   <a className="block relative h-full w-full">
                     <Image
                       src={image}
-                      // width={96}
-                      // height={96}
                       alt={title}
                       objectFit={
                         domain === DomainType.Objects ? 'contain' : 'cover'
