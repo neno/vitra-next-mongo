@@ -19,7 +19,7 @@ export const ListItem: FC<IListItemProps> = ({
       <ContentContainer>
         <article className="flex items-center h-[96px] overflow-hidden">
           {showImage && (
-            <div className="flex-0 w-20 md:w-24 h-20 md:h-24 relative">
+            <div className="flex-none w-20 md:w-24 h-20 md:h-24 relative">
               {image && (
                 <Link href={itemPath}>
                   <a className="block relative h-full w-full">
