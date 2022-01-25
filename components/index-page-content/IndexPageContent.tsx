@@ -8,7 +8,6 @@ import {
   List,
   ListItemSkeleton,
 } from '../../components';
-import { Domain } from 'domain';
 import { DomainType } from '../../types';
 
 export const IndexPageContent = ({
