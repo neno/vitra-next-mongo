@@ -28,16 +28,16 @@ export const ObjectDetails: FC<IObjectDetailsProps> = ({ fields }) => {
   return (
     <section>
       <ContentContainer isSection>
-        <h2 className="flex items-center justify-between pb-2 pt-2 text-gray-400 text-xl md:text-xl">
-          <span>Object details</span>
-          <button
-            onClick={toggleShowDetails}
-            className="flex"
-            title={`Show / hide object details`}
-          >
+        <button
+          onClick={toggleShowDetails}
+          className="block relative w-full"
+          title={`Show / hide object details`}
+        >
+          <h2 className="flex w-full items-center justify-between pb-2 pt-2 text-gray-400 text-xl md:text-xl">
+            <span>Object details</span>
             <Icon iconName={showDetails ? IconType.Up : IconType.Down} />
-          </button>
-        </h2>
+          </h2>
+        </button>
       </ContentContainer>
       {showDetails && (
         <ContentContainer isSection>
