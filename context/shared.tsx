@@ -8,6 +8,7 @@ export const initialData: IDomainData = {
   remainingItemsRef: null,
   searchItems: null,
   listItems: [],
+  showSkeleton: false,
 };
 
 export const DomainContextData = {
@@ -17,11 +18,13 @@ export const DomainContextData = {
   searchItems: initialData.searchItems,
   remainingItemsRef: initialData.remainingItemsRef,
   listItems: initialData.listItems,
+  showSkeleton: initialData.showSkeleton,
   setData: (values: IListItem[][]) => values,
   setTotalCount: (value: number) => value,
   setSearchTerm: (term: string) => term,
   setSearchItems: (values: IListItem[] | null) => values,
   setListItems: (values: IListItem[]) => values,
+  setShowSkeleton: (value: boolean) => value,
 };
 
 export const DomainContextProvider = ({
@@ -34,6 +37,7 @@ export const DomainContextProvider = ({
   const [data, setData] = useState<IListItem[][]>(initialData.data);
   const [totalCount, setTotalCount] = useState<number>(initialData.totalCount);
   const [searchTerm, setSearchTerm] = useState<string>(initialData.searchTerm);
+  const [showSkeleton, setShowSkeleton] = useState(initialData.showSkeleton);
   const [searchItems, setSearchItems] = useState<IListItem[] | null>(
     initialData.searchItems
   );
@@ -64,6 +68,8 @@ export const DomainContextProvider = ({
         remainingItemsRef,
         listItems,
         setListItems,
+        showSkeleton,
+        setShowSkeleton,
       }}
     >
       {children}

@@ -6,4 +6,5 @@ export interface ISearchFormProps {
   searchTerm: string;
   setSearchTerm: (term: string) => void;
   placeholder: string;
+  setShowSkeleton: (value: boolean) => void;
 }

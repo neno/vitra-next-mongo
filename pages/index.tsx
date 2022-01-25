@@ -1,7 +1,7 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 import { fetchObjectItems } from '../lib/api';
 import { fetchAutoCompleteObjects } from '../lib/client-api';
-import { SearchForm, PageHeader, List, Layout } from '../components';
+import { SearchForm, PageHeader, List, ListItemSkeleton } from '../components';
 import { DomainType, IListItem } from '../types';
 import { splitArrayIntoEqualChunks } from '../helper';
 import { useIntersect } from '../hooks/use-intersect';
@@ -23,6 +23,8 @@ const HomePage = ({ chunkItems, totalCount, domain }: IPageProps) => {
     remainingItemsRef,
     setListItems,
     listItems,
+    showSkeleton,
+    setShowSkeleton,
   } = useObjectsData();
 
   const addMoreItems = useCallback(() => {
@@ -44,6 +46,10 @@ const HomePage = ({ chunkItems, totalCount, domain }: IPageProps) => {
     setDoObserve(!searchItems);
   }, [searchItems, setDoObserve]);
 
+  const showSearchItems = useMemo(() => {
+    return !showSkeleton && searchItems;
+  }, [showSkeleton, searchItems]);
+
   return (
     <>
       <PageHeader>Listing Objects</PageHeader>
@@ -52,10 +58,12 @@ const HomePage = ({ chunkItems, totalCount, domain }: IPageProps) => {
         setSearchItems={setSearchItems}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        placeholder={`Search among ${totalCount} objects…`}
+        placeholder={`Search among ${totalCount} ${domain}…`}
+        setShowSkeleton={setShowSkeleton}
       />
-      {searchItems && <List items={searchItems} domain={domain} />}
-      {listItems && listItems.length && (
+      {showSkeleton && <ListItemSkeleton />}
+      {showSearchItems && <List items={searchItems ?? []} domain={domain} />}
+      {listItems.length > 0 && (
         <div
           className="mt-[-1px]"
           style={!!searchItems ? { display: 'none' } : {}}

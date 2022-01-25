@@ -1,8 +1,13 @@
 import type { NextPage } from 'next';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { fetchManufacturerItems } from '../../lib/api';
 import { fetchAutoCompleteManufacturers } from '../../lib/client-api';
-import { SearchForm, PageHeader, List } from '../../components';
+import {
+  SearchForm,
+  PageHeader,
+  List,
+  ListItemSkeleton,
+} from '../../components';
 import { DomainType, IListItem } from '../../types';
 import { splitArrayIntoEqualChunks } from '../../helper';
 import { useIntersect } from '../../hooks/use-intersect';
@@ -29,6 +34,8 @@ const ManufacturersPage: NextPage<IPageProps> = ({
     remainingItemsRef,
     setListItems,
     listItems,
+    showSkeleton,
+    setShowSkeleton,
   } = useManufacturersData();
 
   const addMoreItems = useCallback(() => {
@@ -50,6 +57,10 @@ const ManufacturersPage: NextPage<IPageProps> = ({
     setDoObserve(!searchItems);
   }, [searchItems, setDoObserve]);
 
+  const showSearchItems = useMemo(() => {
+    return !showSkeleton && searchItems;
+  }, [showSkeleton, searchItems]);
+
   return (
     <>
       <PageHeader>Listing Manufacturers</PageHeader>
@@ -58,13 +69,13 @@ const ManufacturersPage: NextPage<IPageProps> = ({
         setSearchItems={setSearchItems}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        placeholder={`Search among ${totalCount} objects…`}
+        placeholder={`Search among ${totalCount} ${domain}…`}
+        setShowSkeleton={setShowSkeleton}
       />
 
-      {searchItems && (
-        <List items={searchItems} domain={domain} showImage={false} />
-      )}
-      {listItems && listItems.length && (
+      {showSkeleton && <ListItemSkeleton />}
+      {showSearchItems && <List items={searchItems ?? []} domain={domain} />}
+      {listItems.length > 0 && (
         <div
           className="mt-[-1px]"
           style={!!searchItems ? { display: 'none' } : {}}

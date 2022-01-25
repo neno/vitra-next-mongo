@@ -58,6 +58,7 @@ export interface IDomainData {
   searchTerm: string;
   searchItems: IListItem[] | null;
   listItems: IListItem[];
+  showSkeleton: boolean;
 }
 
 export interface IDomainContextProps extends IDomainData {
@@ -66,4 +67,5 @@ export interface IDomainContextProps extends IDomainData {
   setSearchTerm: (term: string) => void;
   setSearchItems: (values: IListItem[] | null) => void;
   setListItems: (values: IListItem[]) => void;
+  setShowSkeleton: (value: boolean) => void;
 }

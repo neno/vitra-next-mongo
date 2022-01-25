@@ -13,6 +13,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
   searchTerm,
   setSearchTerm,
   placeholder,
+  setShowSkeleton,
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [showNothingFound, setShowNothingFound] = useState(false);
@@ -29,6 +30,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
     [searchFunction.name, { q: searchTerm }],
     () =>
       searchFunction(searchTerm).then((res: IListItem[]) => {
+        setShowSkeleton(false);
         setSearchItems(res);
         if (res && res.length > 0) {
           setShowNothingFound(false);
@@ -44,6 +46,8 @@ export const SearchForm: FC<ISearchFormProps> = ({
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchTerm(value);
+    setShowSkeleton(value.length > 2);
+    setShowNothingFound(false);
   };
 
   const handleSubmit = (e: FormEvent) => {
