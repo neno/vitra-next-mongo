@@ -5,7 +5,14 @@ import { IPersonImageProps } from './PersonImage.types';
 export const PersonImage: FC<IPersonImageProps> = ({ src, alt }) => {
   return (
     <div className="relative w-full h-[640px]">
-      <Image src={src} alt={alt} layout="fill" objectFit="cover" />
+      <Image
+        src={src}
+        alt={alt}
+        layout="fill"
+        objectFit="cover"
+        placeholder="blur"
+        blurDataURL={src}
+      />
     </div>
   );
 };
