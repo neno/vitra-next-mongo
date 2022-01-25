@@ -53,6 +53,10 @@ export const IndexPageContent = ({
     return !showSkeleton && searchItems;
   }, [showSkeleton, searchItems]);
 
+  const hideListItems = useMemo(() => {
+    return showSkeleton || showSearchItems;
+  }, [showSkeleton, showSearchItems]);
+
   return (
     <>
       <PageHeader>Listing Objects</PageHeader>
@@ -75,7 +79,7 @@ export const IndexPageContent = ({
       {listItems.length > 0 && (
         <div
           className="mt-[-1px]"
-          style={!!searchItems ? { display: 'none' } : {}}
+          style={hideListItems ? { display: 'none' } : {}}
         >
           <List
             items={listItems}
