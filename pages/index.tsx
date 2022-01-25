@@ -9,9 +9,10 @@ import { useObjectsData } from '../context';
 interface IPageProps {
   chunkItems: IListItem[][];
   totalCount: number;
+  domain: DomainType.Objects;
 }
 
-const HomePage = ({ chunkItems, totalCount }: IPageProps) => {
+const HomePage = ({ chunkItems, totalCount, domain }: IPageProps) => {
   const {
     data,
     setData,
@@ -53,13 +54,13 @@ const HomePage = ({ chunkItems, totalCount }: IPageProps) => {
         setSearchTerm={setSearchTerm}
         placeholder={`Search among ${totalCount} objects…`}
       />
-      {searchItems && <List items={searchItems} domain={DomainType.Objects} />}
+      {searchItems && <List items={searchItems} domain={domain} />}
       {listItems && listItems.length && (
         <div
           className="mt-[-1px]"
           style={!!searchItems ? { display: 'none' } : {}}
         >
-          <List items={listItems} domain={DomainType.Objects} />
+          <List items={listItems} domain={domain} />
         </div>
       )}
       <div ref={loadMoreRef}></div>
@@ -74,6 +75,6 @@ export async function getStaticProps() {
   const totalCount = objects.length;
   const chunkItems = splitArrayIntoEqualChunks(objects, 20);
   return {
-    props: { chunkItems, totalCount },
+    props: { chunkItems, totalCount, domain: DomainType.Objects },
   };
 }

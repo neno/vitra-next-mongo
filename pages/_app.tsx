@@ -1,3 +1,4 @@
+import React from 'react';
 import type { AppProps } from 'next/app';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import '../public/fonts/fonts.css';
@@ -11,6 +12,8 @@ import {
   ManufacturersProvider,
 } from '../context';
 
+import { DomainType } from '../types';
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -19,18 +22,24 @@ const queryClient = new QueryClient({
   },
 });
 
+const providers = {
+  [DomainType.Objects]: ObjectsProvider,
+  [DomainType.Designers]: DesignersProvider,
+  [DomainType.Manufacturers]: ManufacturersProvider,
+};
+
 function MyApp({ Component, pageProps }: AppProps) {
+  const DomainProvider = pageProps.domain
+    ? providers[pageProps.domain as DomainType]
+    : React.Fragment;
+
   return (
     <VitraProvider>
       <QueryClientProvider client={queryClient}>
         <Layout>
-          <ObjectsProvider>
-            <DesignersProvider>
-              <ManufacturersProvider>
-                <Component {...pageProps} />
-              </ManufacturersProvider>
-            </DesignersProvider>
-          </ObjectsProvider>
+          <DomainProvider>
+            <Component {...pageProps} />
+          </DomainProvider>
         </Layout>
       </QueryClientProvider>
     </VitraProvider>

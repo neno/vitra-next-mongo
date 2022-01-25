@@ -11,11 +11,13 @@ import { useManufacturersData } from '../../context';
 interface IPageProps {
   chunkItems: IListItem[][];
   totalCount: number;
+  domain: DomainType.Manufacturers;
 }
 
 const ManufacturersPage: NextPage<IPageProps> = ({
   chunkItems,
   totalCount,
+  domain,
 }) => {
   const {
     data,
@@ -60,22 +62,14 @@ const ManufacturersPage: NextPage<IPageProps> = ({
       />
 
       {searchItems && (
-        <List
-          items={searchItems}
-          domain={DomainType.Manufacturers}
-          showImage={false}
-        />
+        <List items={searchItems} domain={domain} showImage={false} />
       )}
       {listItems && listItems.length && (
         <div
           className="mt-[-1px]"
           style={!!searchItems ? { display: 'none' } : {}}
         >
-          <List
-            items={listItems}
-            domain={DomainType.Manufacturers}
-            showImage={false}
-          />
+          <List items={listItems} domain={domain} showImage={false} />
         </div>
       )}
       <div ref={loadMoreRef}></div>
@@ -90,6 +84,6 @@ export async function getStaticProps() {
   const totalCount = manufacturers.length;
   const chunkItems = splitArrayIntoEqualChunks(manufacturers, 20);
   return {
-    props: { chunkItems, totalCount },
+    props: { chunkItems, totalCount, domain: DomainType.Manufacturers },
   };
 }

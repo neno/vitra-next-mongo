@@ -11,9 +11,14 @@ import { useDesignersData } from '../../context';
 interface IPageProps {
   chunkItems: IListItem[][];
   totalCount: number;
+  domain: DomainType.Designers;
 }
 
-const DesignersPage: NextPage<IPageProps> = ({ chunkItems, totalCount }) => {
+const DesignersPage: NextPage<IPageProps> = ({
+  chunkItems,
+  totalCount,
+  domain,
+}) => {
   const {
     data,
     setData,
@@ -56,15 +61,13 @@ const DesignersPage: NextPage<IPageProps> = ({ chunkItems, totalCount }) => {
         placeholder={`Search among ${totalCount} objects…`}
       />
 
-      {searchItems && (
-        <List items={searchItems} domain={DomainType.Designers} />
-      )}
+      {searchItems && <List items={searchItems} domain={domain} />}
       {listItems && listItems.length && (
         <div
           className="mt-[-1px]"
           style={!!searchItems ? { display: 'none' } : {}}
         >
-          <List items={listItems} domain={DomainType.Designers} />
+          <List items={listItems} domain={domain} />
         </div>
       )}
       <div ref={loadMoreRef}></div>
@@ -79,6 +82,6 @@ export async function getStaticProps() {
   const totalCount = designers.length;
   const chunkItems = splitArrayIntoEqualChunks(designers, 20);
   return {
-    props: { chunkItems, totalCount },
+    props: { chunkItems, totalCount, domain: DomainType.Designers },
   };
 }
