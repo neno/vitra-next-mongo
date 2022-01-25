@@ -33,7 +33,7 @@ export const ObjectDetails: FC<IObjectDetailsProps> = ({ fields }) => {
           <button
             onClick={toggleShowDetails}
             className="flex"
-            title={`Show/hide object details`}
+            title={`Show / hide object details`}
           >
             <Icon iconName={showDetails ? IconType.Up : IconType.Down} />
           </button>
