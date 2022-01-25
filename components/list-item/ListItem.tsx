@@ -40,17 +40,21 @@ export const ListItem: FC<IListItemProps> = ({
           )}
           <div className="flex-1 ml-4">
             <Link href={itemPath}>
-              <a className="block w-full overflow-hidden">
-                <h3 className="text-xl md:text-xl max-w-[95%] text-ellipsis whitespace-nowrap overflow-hidden">
-                  {title}
-                </h3>
-                <p className="text-base md:text-xl text-gray-400 max-w-[95%] text-ellipsis whitespace-nowrap overflow-hidden">
-                  {text}
-                </p>
+              <a className="block w-full flex items-center overflow-hidden">
+                <div className="flex-1 relative">
+                  <h3 className="text-xl md:text-xl max-w-[480px] text-ellipsis whitespace-nowrap overflow-hidden">
+                    {title}
+                  </h3>
+                  <p className="text-base md:text-xl text-gray-400 max-w-[480px] text-ellipsis whitespace-nowrap overflow-hidden">
+                    {text}
+                  </p>
+                </div>
+                <div className="flex-none">
+                  <Icon iconName={IconType.Next} />
+                </div>
               </a>
             </Link>
           </div>
-          <Icon iconName={IconType.Next} />
         </article>
       </ContentContainer>
     </div>
