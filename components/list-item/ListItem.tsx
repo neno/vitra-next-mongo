@@ -49,7 +49,7 @@ export const ListItem: FC<IListItemProps> = ({
                     {text}
                   </p>
                 </div>
-                <div className="flex-none">
+                <div className="flex-none text-gray-400">
                   <Icon iconName={IconType.Next} />
                 </div>
               </a>

@@ -41,6 +41,7 @@ const Designer: NextPage<IPageProps> = ({ person }) => {
         prevUrl={`/${DomainType.Designers}`}
         onToggleFavorite={onToggleFavorite}
         isFavorite={isFavorite(person.id, DomainType.Designers)}
+        domain={DomainType.Designers}
       />
 
       {person.text && <RichText text={person.text} />}

@@ -1,4 +1,4 @@
-import { ContentContainer, HoverButton, Icon } from '../../components';
+import { ContentContainer, Icon } from '../../components';
 import Link from 'next/link';
 import { FC } from 'react';
 import { IconType } from '../../types';
@@ -9,6 +9,7 @@ export const Toolbar: FC<IToolbarProps> = ({
   prevUrl,
   onToggleFavorite,
   isFavorite,
+  domain,
 }) => {
   const cssClass = `block h-full px-3 flex flex-column items-center justify-center text-gray-400 border-r ${styles.btn}`;
 
@@ -17,7 +18,7 @@ export const Toolbar: FC<IToolbarProps> = ({
       <menu className="flex items-center h-[47px] border-l">
         <li className="h-full">
           <Link href={prevUrl}>
-            <a className={cssClass}>
+            <a className={cssClass} title={`Return to ${domain}`}>
               <Icon iconName={IconType.Prev} />
             </a>
           </Link>

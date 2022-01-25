@@ -4,4 +4,5 @@ export interface IToolbarProps {
   prevUrl: string;
   onToggleFavorite: () => void;
   isFavorite: boolean;
+  domain: DomainType;
 }

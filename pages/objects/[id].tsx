@@ -41,6 +41,7 @@ const Object: NextPage<IPageProps> = ({ object }) => {
         prevUrl="/"
         onToggleFavorite={onToggleFavorite}
         isFavorite={isFavorite(object.id, DomainType.Objects)}
+        domain={DomainType.Objects}
       />
       <ObjectDetails
         fields={{
