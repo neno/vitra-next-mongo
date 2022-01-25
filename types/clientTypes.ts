@@ -50,3 +50,20 @@ export interface IPerson {
   text: string;
   relatedObjects: IRelatedItem[];
 }
+
+export interface IDomainData {
+  data: IListItem[][];
+  totalCount: number;
+  remainingItemsRef: any;
+  searchTerm: string;
+  searchItems: IListItem[] | null;
+  listItems: IListItem[];
+}
+
+export interface IObjectContextProps extends IDomainData {
+  setData: (values: IListItem[][]) => void;
+  setTotalCount: (value: number) => void;
+  setSearchTerm: (term: string) => void;
+  setSearchItems: (values: IListItem[] | null) => void;
+  setListItems: (values: IListItem[]) => void;
+}

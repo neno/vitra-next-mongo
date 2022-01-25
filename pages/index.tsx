@@ -1,19 +1,43 @@
-import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 import { fetchObjectItems } from '../lib/api';
 import { fetchAutoCompleteObjects } from '../lib/client-api';
-import { SearchForm, PageHeader, List } from '../components';
+import { SearchForm, PageHeader, List, Layout } from '../components';
 import { DomainType, IListItem } from '../types';
 import { splitArrayIntoEqualChunks } from '../helper';
 import { useIntersect } from '../hooks/use-intersect';
+import { useObjectsData } from '../context/ObjectsContext';
 interface IPageProps {
   chunkItems: IListItem[][];
-  total: number;
+  totalCount: number;
 }
 
-const HomePage: NextPage<IPageProps> = ({ chunkItems, total }) => {
-  const [searchItems, setSearchItems] = useState<IListItem[] | null>(null);
-  const { items, loadMoreRef, setDoObserve } = useIntersect(chunkItems);
+const HomePage = ({ chunkItems, totalCount }: IPageProps) => {
+  const {
+    data,
+    setData,
+    searchItems,
+    setSearchItems,
+    searchTerm,
+    setSearchTerm,
+    remainingItemsRef,
+    setListItems,
+    listItems,
+  } = useObjectsData();
+
+  const addMoreItems = useCallback(() => {
+    if (remainingItemsRef.current?.length > 0) {
+      const chunk = remainingItemsRef.current.splice(0, 1).flat();
+      setListItems([...listItems, ...chunk]);
+    }
+  }, [remainingItemsRef, listItems, setListItems]);
+
+  const { loadMoreRef, setDoObserve } = useIntersect(chunkItems, addMoreItems);
+
+  useEffect(() => {
+    if (data.length === 0) {
+      setData(chunkItems);
+    }
+  }, [data, setData, chunkItems]);
 
   useEffect(() => {
     setDoObserve(!searchItems);
@@ -25,15 +49,17 @@ const HomePage: NextPage<IPageProps> = ({ chunkItems, total }) => {
       <SearchForm
         searchFunction={fetchAutoCompleteObjects}
         setSearchItems={setSearchItems}
-        placeholder={`Search among ${total} objects…`}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        placeholder={`Search among ${totalCount} objects…`}
       />
       {searchItems && <List items={searchItems} domain={DomainType.Objects} />}
-      {items && items.length && (
+      {listItems && listItems.length && (
         <div
           className="mt-[-1px]"
           style={!!searchItems ? { display: 'none' } : {}}
         >
-          <List items={items} domain={DomainType.Objects} />
+          <List items={listItems} domain={DomainType.Objects} />
         </div>
       )}
       <div ref={loadMoreRef}></div>
@@ -45,9 +71,9 @@ export default HomePage;
 
 export async function getStaticProps() {
   const objects = await fetchObjectItems();
-  const total = objects.length;
+  const totalCount = objects.length;
   const chunkItems = splitArrayIntoEqualChunks(objects, 20);
   return {
-    props: { chunkItems, total },
+    props: { chunkItems, totalCount },
   };
 }

@@ -10,10 +10,11 @@ import { Circles, Rings } from 'svg-loaders-react';
 export const SearchForm: FC<ISearchFormProps> = ({
   searchFunction,
   setSearchItems,
+  searchTerm,
+  setSearchTerm,
   placeholder,
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
-  const [searchTerm, setSearchTerm] = useState('');
   const [showNothingFound, setShowNothingFound] = useState(false);
   const { scrollDirection, isSticky } = useScrollDirection();
   let cssClass = styles.sticky;

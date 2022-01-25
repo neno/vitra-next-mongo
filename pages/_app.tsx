@@ -5,6 +5,7 @@ import 'tailwindcss/tailwind.css';
 import '../styles/global.css';
 import { Layout } from '../components';
 import { VitraProvider } from '../context/VitraContext';
+import { ObjectsProvider } from '../context';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,7 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <VitraProvider>
       <QueryClientProvider client={queryClient}>
         <Layout>
-          <Component {...pageProps} />
+          <ObjectsProvider>
+            <Component {...pageProps} />
+          </ObjectsProvider>
         </Layout>
       </QueryClientProvider>
     </VitraProvider>
