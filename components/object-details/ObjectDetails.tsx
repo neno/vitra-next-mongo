@@ -18,8 +18,11 @@ const fieldsOrder: TObjectDefListFieldType[] = [
   'inventoryNo',
 ];
 
-export const ObjectDetails: FC<IObjectDetailsProps> = ({ fields }) => {
-  const [showDetails, setShowDetails] = useState(false);
+export const ObjectDetails: FC<IObjectDetailsProps> = ({
+  fields,
+  showDetailsInitially,
+}) => {
+  const [showDetails, setShowDetails] = useState(showDetailsInitially);
 
   const toggleShowDetails = () => {
     setShowDetails(!showDetails);
