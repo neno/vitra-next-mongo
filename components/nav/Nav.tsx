@@ -24,7 +24,7 @@ export const Nav: FC = () => {
   };
 
   return (
-    <div className="h-[100vh] border-r ">
+    <div className="h-[100vh] border-r">
       <ContentContainer>
         <div className="text-2xl md:text-4xl flex items-center h-full p-4">
           <Logo />

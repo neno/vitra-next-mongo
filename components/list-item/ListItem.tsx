@@ -17,9 +17,9 @@ export const ListItem: FC<IListItemProps> = ({
   return (
     <div className="relative">
       <ContentContainer animate>
-        <article className="flex items-center h-[96px] overflow-hidden">
+        <article className="flex items-center h-20 sm:h-24 overflow-hidden">
           {showImage && (
-            <div className="flex-none w-20 md:w-24 h-20 md:h-24 bg-white relative">
+            <div className="flex-none w-20 sm:w-24 h-full relative">
               {image && (
                 <Link href={itemPath}>
                   <a className="block relative h-full w-full bg-white">
@@ -38,22 +38,20 @@ export const ListItem: FC<IListItemProps> = ({
               )}
             </div>
           )}
-          <div className="flex-1 ml-4">
+          <div className="flex-1 ml-4 h-full">
             <Link href={itemPath}>
-              <a className="block w-full flex items-center overflow-hidden">
-                <div className="flex-1 relative">
-                  <h3 className="text-xl md:text-xl max-w-[480px] text-ellipsis whitespace-nowrap overflow-hidden">
-                    {title}
-                  </h3>
-                  <p className="text-base md:text-xl text-gray-400 max-w-[480px] text-ellipsis whitespace-nowrap overflow-hidden">
-                    {text}
-                  </p>
-                </div>
-                <div className="flex-none text-gray-400">
-                  <Icon iconName={IconType.Next} />
-                </div>
+              <a className="block w-[18rem] sm:w-[30rem] h-full flex flex-col justify-center">
+                <h3 className="text-lg sm:text-xl text-ellipsis overflow-hidden truncate">
+                  {title}
+                </h3>
+                <p className="text-lg sm:text-xl text-gray-400 text-ellipsis overflow-hidden truncate">
+                  {text}
+                </p>
               </a>
             </Link>
+          </div>
+          <div className="flex-none text-gray-400 w-8">
+            <Icon iconName={IconType.Next} />
           </div>
         </article>
       </ContentContainer>

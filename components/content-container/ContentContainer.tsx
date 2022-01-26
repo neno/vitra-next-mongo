@@ -9,12 +9,12 @@ export const ContentContainer: FC<IContentContainerProps> = ({
 }) => {
   return (
     <div
-      className={`border-t relative overflow-hidden ${animate && styles.item}`}
+      className={`border-t relative overflow-hidden md:border-b ${
+        animate && styles.item
+      }`}
     >
       <div
-        className={`max-w-screen-sm mx-auto px-4 md:px-0${
-          isSection ? '' : ' h-20 md:h-24'
-        }`}
+        className={`max-w-screen-sm mx-auto${isSection ? '' : ' h-20 sm:h-24'}`}
       >
         {children}
       </div>
