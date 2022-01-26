@@ -59,33 +59,39 @@ export const IndexPageContent = ({
 
   return (
     <>
-      <PageHeader>Listing Objects</PageHeader>
-      <SearchForm
-        searchFunction={fetchAutoCompleteObjects}
-        setSearchItems={setSearchItems}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        placeholder={`Search among ${totalCount} ${domain}…`}
-        setShowSkeleton={setShowSkeleton}
-      />
-      {showSkeleton && <ListItemSkeleton />}
-      {showSearchItems && (
-        <List
-          items={searchItems ?? []}
-          domain={domain}
-          showImage={domain !== DomainType.Manufacturers}
+      <PageHeader>{domain}</PageHeader>
+      <section>
+        <h2 className="sr-only">Find {domain}</h2>
+        <SearchForm
+          searchFunction={fetchAutoCompleteObjects}
+          setSearchItems={setSearchItems}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          placeholder={`Search among ${totalCount} ${domain}…`}
+          setShowSkeleton={setShowSkeleton}
         />
-      )}
-      {listItems.length > 0 && (
-        <div className={`mt-[-1px] ${hideListItems && 'hidden'}`}>
+        {showSkeleton && <ListItemSkeleton />}
+        {showSearchItems && (
           <List
-            items={listItems}
+            items={searchItems ?? []}
             domain={domain}
             showImage={domain !== DomainType.Manufacturers}
           />
-        </div>
-      )}
-      <div ref={loadMoreRef}></div>
+        )}
+      </section>
+      <section>
+        <h2 className="sr-only">Listing all {domain}</h2>
+        {listItems.length > 0 && (
+          <div className={`mt-[-1px] ${hideListItems && 'hidden'}`}>
+            <List
+              items={listItems}
+              domain={domain}
+              showImage={domain !== DomainType.Manufacturers}
+            />
+          </div>
+        )}
+        <div ref={loadMoreRef}></div>
+      </section>
     </>
   );
 };
