@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ContentContainer, Icon } from '..';
 import { Logo } from '../logo';
-import styles from './Nav.module.scss';
 import { IconType } from '../../types';
+import styles from './Nav.module.scss';
 
 const navItems = [
   { title: 'Objects', path: '/' },

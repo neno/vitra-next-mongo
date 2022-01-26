@@ -83,7 +83,7 @@ export const IndexPageContent = ({
       <section>
         <h2 className="sr-only">Listing all {domain}</h2>
         {listItems.length > 0 && (
-          <div className={`mt-[-1px] ${hideListItems && 'hidden'}`}>
+          <div className={` ${hideListItems && 'hidden'}`}>
             <List
               items={listItems}
               domain={domain}
