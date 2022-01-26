@@ -6,7 +6,7 @@ export const ContentContainer: FC<IContentContainerProps> = ({
   isSection = false,
 }) => {
   return (
-    <div className="border-t">
+    <div className="border-t overflow-hidden">
       <div
         className={`max-w-screen-sm mx-auto px-4 md:px-0${
           isSection ? '' : ' h-20 md:h-24'
