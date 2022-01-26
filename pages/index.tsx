@@ -1,8 +1,9 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { fetchObjectItems } from '../lib/api';
 import { IndexPageContent } from '../components';
 import { DomainType, IListItem } from '../types';
-import { splitArrayIntoEqualChunks } from '../helper';
+import { getAppTitle, splitArrayIntoEqualChunks } from '../helper';
 import { useObjectsData } from '../context';
 interface IPageProps {
   chunkItems: IListItem[][];
@@ -16,12 +17,21 @@ const HomePage: NextPage<IPageProps> = ({
   domain,
 }: IPageProps) => {
   return (
-    <IndexPageContent
-      chunkItems={chunkItems}
-      totalCount={totalCount}
-      domain={domain}
-      useData={useObjectsData}
-    />
+    <>
+      <Head>
+        <title>{getAppTitle('Objects')}</title>
+        <meta
+          name="description"
+          content="Listing design objects from the Vitra Design Museum"
+        />
+      </Head>
+      <IndexPageContent
+        chunkItems={chunkItems}
+        totalCount={totalCount}
+        domain={domain}
+        useData={useObjectsData}
+      />
+    </>
   );
 };
 

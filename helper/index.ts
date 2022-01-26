@@ -89,6 +89,7 @@ export function mapDocumentToObject(doc: IObjectServer): IObject {
     description: doc.ObjMarkdown
       ? doc.ObjMarkdown.replace(/<br><br>/g, '<br>')
       : '',
+    metaDescription: doc.ObjFullText ? doc.ObjFullText : '',
     relatedObjects:
       doc.ObjObjectRel?.map((obj: IObjectRelation) => ({
         id: obj.ObjId,
@@ -157,6 +158,7 @@ export const mapDocumentToPerson = (doc: IPersonServer): IPerson => {
     country: doc.PerBirthPlaceCountry ?? '',
     type: doc.PerTypeVoc ?? '',
     text: doc.PerMarkdown ?? '',
+    metaDescription: doc.PerFullText ?? '',
     relatedObjects:
       doc.PerObjectRel?.map((obj: IPersonObjectRelation) => ({
         id: obj.ObjId,
@@ -187,3 +189,7 @@ export const mapManufacturerToListItem = (person: IPerson): IListItem => ({
   text: createCommaSeparatedString(person.place, person.country),
   image: person.image,
 });
+
+export const getAppTitle = (title: string) => {
+  return `${title} - Vitra Design Museum`;
+};

@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import Head from 'next/head';
 import { fetchAllObjectIds, fetchObject } from '../../lib/api';
 import {
   Aside,
@@ -11,7 +12,7 @@ import {
 } from './../../components';
 import { DomainType, IObject } from '../../types';
 import { useFavorites } from '../../hooks/useFavorites';
-import { mapObjectToListItem } from '../../helper';
+import { getAppTitle, mapObjectToListItem } from '../../helper';
 
 interface IPath {
   params: { id: string };
@@ -33,52 +34,63 @@ const Object: NextPage<IPageProps> = ({ object }) => {
   };
 
   return (
-    <div className="pb-16">
-      {object.image && <DetailImage src={object.image} alt={object.title} />}
+    <>
+      <Head>
+        <title>{getAppTitle(object.fullTitle)}</title>
+        {object.metaDescription && (
+          <meta name="description" content={object.metaDescription} />
+        )}
+      </Head>
+      <div className="pb-16">
+        {object.image && <DetailImage src={object.image} alt={object.title} />}
 
-      <Heading title={object.fullTitle} designer={object.designer} />
-      <Toolbar
-        prevUrl="/"
-        onToggleFavorite={onToggleFavorite}
-        isFavorite={isFavorite(object.id, DomainType.Objects)}
-        domain={DomainType.Objects}
-      />
-      <ObjectDetails
-        fields={{
-          title: object.title,
-          designed: object.designed,
-          designer: object.designer,
-          type: object.type,
-          firstProduction: object.firstProduction,
-          dating: object.dating,
-          material: object.material,
-          dimensions: object.dimensions,
-          inventoryNo: object.inventoryNo,
-        }}
-        showDetailsInitially={!object.description}
-      />
+        <Heading title={object.fullTitle} designer={object.designer} />
+        <Toolbar
+          prevUrl="/"
+          onToggleFavorite={onToggleFavorite}
+          isFavorite={isFavorite(object.id, DomainType.Objects)}
+          domain={DomainType.Objects}
+        />
+        <ObjectDetails
+          fields={{
+            title: object.title,
+            designed: object.designed,
+            designer: object.designer,
+            type: object.type,
+            firstProduction: object.firstProduction,
+            dating: object.dating,
+            material: object.material,
+            dimensions: object.dimensions,
+            inventoryNo: object.inventoryNo,
+          }}
+          showDetailsInitially={!object.description}
+        />
 
-      {object.description && <RichText text={object.description} />}
+        {object.description && <RichText text={object.description} />}
 
-      {object.relatedObjects.length > 0 && (
-        <Aside title="Objects">
-          <List items={object.relatedObjects} domain={DomainType.Objects} />
-        </Aside>
-      )}
-      {object.relatedDesigners.length > 0 && (
-        <Aside title="Designers">
-          <List items={object.relatedDesigners} domain={DomainType.Designers} />
-        </Aside>
-      )}
-      {object.relatedManufacturers.length > 0 && (
-        <Aside title="Manufacturer">
-          <List
-            items={object.relatedManufacturers}
-            domain={DomainType.Manufacturers}
-          />
-        </Aside>
-      )}
-    </div>
+        {object.relatedObjects.length > 0 && (
+          <Aside title="Objects">
+            <List items={object.relatedObjects} domain={DomainType.Objects} />
+          </Aside>
+        )}
+        {object.relatedDesigners.length > 0 && (
+          <Aside title="Designers">
+            <List
+              items={object.relatedDesigners}
+              domain={DomainType.Designers}
+            />
+          </Aside>
+        )}
+        {object.relatedManufacturers.length > 0 && (
+          <Aside title="Manufacturer">
+            <List
+              items={object.relatedManufacturers}
+              domain={DomainType.Manufacturers}
+            />
+          </Aside>
+        )}
+      </div>
+    </>
   );
 };
 

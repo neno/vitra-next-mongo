@@ -29,6 +29,7 @@ const objectProjection = {
   ObjObjectNumberGrp_Part1Txt: 1,
   ObjPersonRel: 1,
   ObjObjectRel: 1,
+  ObjFullText: 1,
 };
 
 const designerItemProjection = {
@@ -75,6 +76,7 @@ const personProjection = {
   PerMultimediaRel: 1,
   PerMarkdown: 1,
   PerObjectRel: 1,
+  PerFullText: 1,
 };
 
 export async function fetchObjectItems(): Promise<IListItem[]> {

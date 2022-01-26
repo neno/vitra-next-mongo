@@ -4,4 +4,8 @@ module.exports = {
   images: {
     domains: ['vitra.zetcom.com'],
   },
+  i18n: {
+    locales: ['en'],
+    defaultLocale: 'en',
+  },
 };

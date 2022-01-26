@@ -23,6 +23,7 @@ export interface IObjectServer extends IObjectItemServer {
   ObjMarkdown?: string; // Description
   ObjDateGrp_Notes2Clb?: string; // First Production
   ObjObjectNumberGrp_Part1Txt?: string; // InventorNo
+  ObjFullText?: string; // meta description, full text search
   ObjPersonRel?: IPersonRelation[];
   ObjObjectRel?: IObjectRelation[];
 }

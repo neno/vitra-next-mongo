@@ -17,6 +17,7 @@ export interface IObject extends IObjectItem {
   type: string;
   inventoryNo: string;
   description: string;
+  metaDescription: string;
   relatedObjects: IRelatedItem[];
   relatedDesigners: IRelatedItem[];
   relatedManufacturers: IRelatedItem[];
@@ -48,6 +49,7 @@ export interface IPerson {
   country: string;
   type: PersonType;
   text: string;
+  metaDescription: string;
   relatedObjects: IRelatedItem[];
 }
 
