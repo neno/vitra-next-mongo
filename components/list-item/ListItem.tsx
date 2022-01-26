@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { ContentContainer, Icon } from '..';
 import { DomainType, IconType } from '../../types';
 import { IListItemProps } from './ListItem.type';
-import styles from './ListItem.module.scss';
 
 export const ListItem: FC<IListItemProps> = ({
   item: { id, image, title, text },
@@ -17,14 +16,10 @@ export const ListItem: FC<IListItemProps> = ({
 
   return (
     <div className="relative">
-      <ContentContainer>
-        <article
-          className={`flex items-center h-[96px] overflow-hidden ${styles.item}`}
-        >
+      <ContentContainer animate>
+        <article className="flex items-center h-[96px] overflow-hidden">
           {showImage && (
-            <div
-              className={`flex-none w-20 md:w-24 h-20 md:h-24 bg-white relative ${styles.image}`}
-            >
+            <div className="flex-none w-20 md:w-24 h-20 md:h-24 bg-white relative">
               {image && (
                 <Link href={itemPath}>
                   <a className="block relative h-full w-full bg-white">
@@ -46,7 +41,7 @@ export const ListItem: FC<IListItemProps> = ({
           <div className="flex-1 ml-4">
             <Link href={itemPath}>
               <a className="block w-full flex items-center overflow-hidden">
-                <div className={`flex-1 relative ${styles.text}`}>
+                <div className="flex-1 relative">
                   <h3 className="text-xl md:text-xl max-w-[480px] text-ellipsis whitespace-nowrap overflow-hidden">
                     {title}
                   </h3>

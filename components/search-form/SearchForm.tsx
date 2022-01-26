@@ -68,7 +68,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit} className={cssClass} ref={formRef}>
-      <ContentContainer>
+      <ContentContainer animate>
         <div className="flex relative items-center mx-auto h-full">
           <label className="sr-only" htmlFor="vitra-search">
             Find Objects
