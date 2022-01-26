@@ -4,7 +4,7 @@
   top: -97px;
   background-color: white;
   transition: top 0.5s;
-  border-bottom: 1px solid #e5e7eb;
+  /* border-bottom: 1px solid #e5e7eb; */
 }
 
 .stickyVisible {
