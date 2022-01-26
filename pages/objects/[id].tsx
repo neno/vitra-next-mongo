@@ -25,6 +25,7 @@ interface IGetStaticPathsProps {
 
 interface IPageProps {
   object: IObject;
+  domain: DomainType.Objects;
 }
 
 const Object: NextPage<IPageProps> = ({ object }) => {
@@ -111,9 +112,11 @@ export async function getStaticPaths(): Promise<IGetStaticPathsProps> {
 
 export async function getStaticProps({ params }: IPath) {
   const object: IObject = await fetchObject(params.id);
+
   return {
     props: {
       object,
+      domain: DomainType.Objects, // enable the context per domain
     },
   };
 }

@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { fetchObjectItems } from '../lib/api';
+import { fetchAutoCompleteObjects } from '../lib/client-api';
 import { IndexPageContent } from '../components';
 import { DomainType, IListItem } from '../types';
 import { getAppTitle, splitArrayIntoEqualChunks } from '../helper';
@@ -30,6 +31,7 @@ const HomePage: NextPage<IPageProps> = ({
         totalCount={totalCount}
         domain={domain}
         useData={useObjectsData}
+        searchFunction={fetchAutoCompleteObjects}
       />
     </>
   );

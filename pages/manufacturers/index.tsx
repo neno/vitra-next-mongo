@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { fetchManufacturerItems } from '../../lib/api';
+import { fetchAutoCompleteManufacturers } from '../../lib/client-api';
 import { IndexPageContent } from '../../components';
 import { DomainType, IListItem } from '../../types';
 import { getAppTitle, splitArrayIntoEqualChunks } from '../../helper';
@@ -31,6 +32,7 @@ const ManufacturersPage: NextPage<IPageProps> = ({
         totalCount={totalCount}
         domain={domain}
         useData={useManufacturersData}
+        searchFunction={fetchAutoCompleteManufacturers}
       />
     </>
   );

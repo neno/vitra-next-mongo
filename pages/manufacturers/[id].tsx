@@ -21,6 +21,7 @@ interface IGetStaticPathsProps {
 
 interface IPageProps {
   person: IPerson;
+  domain: DomainType.Manufacturers;
 }
 
 const Designer: NextPage<IPageProps> = ({ person }) => {
@@ -88,6 +89,7 @@ export async function getStaticProps({ params }: IPath) {
   return {
     props: {
       person,
+      domain: DomainType.Manufacturers, // enable the context per domain
     },
   };
 }

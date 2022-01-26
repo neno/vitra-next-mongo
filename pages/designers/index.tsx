@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { fetchDesignerItems } from '../../lib/api';
+import { fetchAutoCompleteDesigners } from '../../lib/client-api';
 import { IndexPageContent } from '../../components';
 import { DomainType, IListItem } from '../../types';
 import { getAppTitle, splitArrayIntoEqualChunks } from '../../helper';
@@ -31,6 +32,7 @@ const DesignersPage: NextPage<IPageProps> = ({
         totalCount={totalCount}
         domain={domain}
         useData={useDesignersData}
+        searchFunction={fetchAutoCompleteDesigners}
       />
     </>
   );

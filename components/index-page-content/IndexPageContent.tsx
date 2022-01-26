@@ -15,6 +15,7 @@ export const IndexPageContent = ({
   totalCount,
   domain,
   useData,
+  searchFunction,
 }: IndexPageContentProps) => {
   const {
     data,
@@ -63,7 +64,7 @@ export const IndexPageContent = ({
       <section>
         <h2 className="sr-only">Find {domain}</h2>
         <SearchForm
-          searchFunction={fetchAutoCompleteObjects}
+          searchFunction={searchFunction}
           setSearchItems={setSearchItems}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
