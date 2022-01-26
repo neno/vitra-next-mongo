@@ -73,20 +73,22 @@ export const SearchForm: FC<ISearchFormProps> = ({
           <label className="sr-only" htmlFor="vitra-search">
             Find Objects
           </label>
-          <Icon iconName={IconType.Search} size="2.5rem" />
+          <div className="w-[96px] h-[96px] flex-none flex justify-center items-center">
+            <Icon iconName={IconType.Search} size="2.5rem" />
+          </div>
           <input
             id="vitra-search"
             type="text"
             placeholder={placeholder}
             value={searchTerm}
             onChange={handleChange}
-            className="w-full h:12 md:h-14 text-2xl md:text-4xl leading-loose ml-2 p-2 mr-2 pr-12 focus:text-white focus:bg-black"
+            className="w-full border h:12 md:h-14 text-2xl md:text-4xl leading-loose ml-2 p-2 mr-2 pr-12 focus:text-white focus:bg-black"
           />
           <button type="submit" className="sr-only">
             submit
           </button>
           <div
-            className={`absolute top-[50%] mt-[-19px] right-2 z-5000 translate-x-[-36px] ${
+            className={`flex text-white absolute z-10 right-[1rem] top-[50%] mt-[-1.25rem] ${
               !isLoading && 'hidden'
             }`}
           >
@@ -94,10 +96,12 @@ export const SearchForm: FC<ISearchFormProps> = ({
           </div>
           <button
             onClick={reset}
-            className={`flex ${!searchTerm ? 'invisible' : ''}`}
+            className={`flex z-10 text-white absolute right-[1rem] top-[50%] mt-[-1.25rem] ${
+              !searchTerm || isLoading ? 'invisible' : ''
+            }`}
             title="Clear search term"
           >
-            <Icon iconName={IconType.Close} />
+            <Icon iconName={IconType.Close} size="2.5rem" />
           </button>
         </div>
       </ContentContainer>
@@ -105,3 +109,8 @@ export const SearchForm: FC<ISearchFormProps> = ({
     </form>
   );
 };
+
+// position: absolute;
+// right: 1rem;
+// top: 50%;
+// margin-top: -1.25rem;
