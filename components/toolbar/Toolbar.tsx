@@ -15,7 +15,7 @@ export const Toolbar: FC<IToolbarProps> = ({
 
   return (
     <ContentContainer isSection>
-      <menu className="flex items-center h-[47px] border-l">
+      <ul className="flex items-center h-[47px] border-l">
         <li className="h-full">
           <Link href={prevUrl}>
             <a className={cssClass} title={`Return to ${domain}`}>
@@ -32,7 +32,7 @@ export const Toolbar: FC<IToolbarProps> = ({
             <Icon iconName={IconType.Highlight} />
           </button>
         </li>
-      </menu>
+      </ul>
     </ContentContainer>
   );
 };
