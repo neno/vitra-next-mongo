@@ -1,6 +1,7 @@
 import { IListItem } from '../types';
 
 export interface IVitraData {
+  isNavOpen: boolean;
   favorites: {
     objects: IListItem[];
     designers: IListItem[];

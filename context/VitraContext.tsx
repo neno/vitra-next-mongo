@@ -8,6 +8,7 @@ import React, {
 import { IVitraContextProps, IVitraData } from './VitraContext.types';
 
 const initialVitraData: IVitraData = {
+  isNavOpen: false,
   favorites: {
     objects: [],
     designers: [],

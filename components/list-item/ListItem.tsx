@@ -38,13 +38,13 @@ export const ListItem: FC<IListItemProps> = ({
               )}
             </div>
           )}
-          <div className="flex-1 ml-4 h-full">
+          <div className="flex-1 ml-2 sm:ml-4 overflow-hidden">
             <Link href={itemPath}>
-              <a className="block w-[18rem] sm:w-[30rem] h-full flex flex-col justify-center">
-                <h3 className="text-lg sm:text-xl text-ellipsis overflow-hidden truncate">
+              <a className="block w-max-full h-full flex flex-col justify-center mr-2">
+                <h3 className="text-lg sm:text-xl w-full text-ellipsis overflow-hidden truncate">
                   {title}
                 </h3>
-                <p className="text-lg sm:text-xl text-gray-400 text-ellipsis overflow-hidden truncate">
+                <p className="text-lg sm:text-xl w-full text-gray-400 text-ellipsis truncate">
                   {text}
                 </p>
               </a>
