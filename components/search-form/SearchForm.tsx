@@ -105,9 +105,9 @@ export const SearchForm: FC<ISearchFormProps> = ({
               <Icon iconName={IconType.Close} size="2.5rem" />
             </button>
           </div>
-          <div className="w-20 sm:w-24 h-20 sm:hidden sm:h-24 flex-none flex justify-center items-center ">
+          {/* <div className="w-20 sm:w-24 h-20 sm:hidden sm:h-24 flex-none flex justify-center items-center ">
             <Icon iconName={IconType.Menu} size="2.5rem" />
-          </div>
+          </div> */}
         </div>
       </ContentContainer>
       {showNothingFound && <NothingFound />}

@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { motion } from 'framer-motion';
 import { IContentContainerProps } from './ContentContainer.types';
-import styles from './ContentContainer.module.scss';
 
 const whileHover = {
   scale: 1.05,
