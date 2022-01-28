@@ -33,7 +33,7 @@ export const ObjectDetails: FC<IObjectDetailsProps> = ({
       <ContentContainer isSection>
         <button
           onClick={toggleShowDetails}
-          className="block relative w-full"
+          className="block relative w-full px-4 md:px-0"
           title={`Show / hide object details`}
         >
           <h2 className="flex w-full items-center justify-between pb-2 pt-2 text-gray-400 text-xl md:text-xl">
@@ -44,7 +44,7 @@ export const ObjectDetails: FC<IObjectDetailsProps> = ({
       </ContentContainer>
       {showDetails && (
         <ContentContainer isSection>
-          <dl className="overflow-hidden py-4">
+          <dl className="overflow-hidden p-4 md:px-0">
             {fieldsOrder.map((key: TObjectDefListFieldType) => {
               if (fields[key]) {
                 return (
