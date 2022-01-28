@@ -1,5 +1,4 @@
 import { useEffect, useCallback, useMemo } from 'react';
-import { fetchAutoCompleteObjects } from '../../lib/client-api';
 import { useIntersect } from '../../hooks/use-intersect';
 import { IndexPageContentProps } from './IndexPageContent.types';
 import {

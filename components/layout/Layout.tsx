@@ -10,7 +10,6 @@ export const Layout: FC = ({ children }) => {
   const isSmall = useIsSmall();
 
   const navWidth = isSmall ? '10.5rem' : '100vw';
-  console.log('isSmall', isSmall, navWidth);
 
   const versionsNav = {
     initial: { marginLeft: `-${navWidth}` },
