@@ -6,7 +6,7 @@ type TScrollDirection = 'down' | 'up';
 export const useScrollDirection = () => {
   const windowRef = useRef<any>(null);
   const pageOffsetRef = useRef(0);
-  const [isSticky, setIsSticky] = useState(false);
+  const [showSearchForm, setShowSearchForm] = useState(false);
   const [scrollDirection, setScrollDirection] =
     useState<TScrollDirection>('down');
 
@@ -15,14 +15,14 @@ export const useScrollDirection = () => {
     const { current: lastPageYOffset } = pageOffsetRef;
     pageOffsetRef.current = currentPageYOffset;
 
-    // if (Math.abs(currentPageYOffset - lastPageYOffset) < 10) return;
+    if (Math.abs(currentPageYOffset - lastPageYOffset) < 10) return;
 
     if (currentPageYOffset > lastPageYOffset) {
       setScrollDirection('down');
     } else {
       setScrollDirection('up');
     }
-    setIsSticky(currentPageYOffset > 2 * 97);
+    setShowSearchForm(currentPageYOffset > 2 * 97);
   }, []);
 
   useEffect(() => {
@@ -34,5 +34,5 @@ export const useScrollDirection = () => {
     };
   }, [handleScroll]);
 
-  return { scrollDirection, isSticky };
+  return { scrollDirection, showSearchForm };
 };

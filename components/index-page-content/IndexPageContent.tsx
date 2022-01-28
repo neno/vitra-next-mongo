@@ -62,7 +62,7 @@ export const IndexPageContent = ({
   return (
     <>
       <PageHeader>{domain}</PageHeader>
-      <section>
+      <section className="relative z-10">
         <h2 className="sr-only">Find {domain}</h2>
         <SearchForm
           searchFunction={searchFunction}
@@ -85,18 +85,21 @@ export const IndexPageContent = ({
           />
         )}
       </section>
-      <section>
+      <section className="relative z-5 pt-20 sm:pt-24">
         <h2 className="sr-only">Listing all {domain}</h2>
-        {listItems.length > 0 && (
+        {(listItems.length > 0 || chunkItems[0]) && (
+          // On first load listItems will be empty.
+          // Therefore we take the chunkItems.
+          // All subsequent renderings will contain the listItems
           <div className={` ${hideListItems && 'hidden'}`}>
             <List
-              items={listItems}
+              items={listItems.length > 0 ? listItems : chunkItems[0]}
               domain={domain}
               showImage={domain !== DomainType.Manufacturers}
             />
+            <div ref={loadMoreRef}></div>
           </div>
         )}
-        <div ref={loadMoreRef}></div>
       </section>
     </>
   );
