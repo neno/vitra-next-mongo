@@ -9,6 +9,7 @@ import {
   ListItemSkeleton,
 } from '../../components';
 import { DomainType } from '../../types';
+import { useIsLarge } from '../../hooks/utils';
 
 export const IndexPageContent = ({
   chunkItems,
@@ -39,6 +40,7 @@ export const IndexPageContent = ({
   }, [remainingItemsRef, listItems, setListItems]);
 
   const { loadMoreRef, setDoObserve } = useIntersect(chunkItems, addMoreItems);
+  const isLarge = useIsLarge();
 
   useEffect(() => {
     if (data.length === 0) {
@@ -68,7 +70,11 @@ export const IndexPageContent = ({
           setSearchItems={setSearchItems}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          placeholder={`Search among ${totalCount} ${domain}…`}
+          placeholder={
+            isLarge
+              ? `Search among ${totalCount} ${domain}…`
+              : `Search ${domain}…`
+          }
           setShowSkeleton={setShowSkeleton}
         />
         {showSkeleton && <ListItemSkeleton />}

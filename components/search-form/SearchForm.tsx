@@ -6,6 +6,7 @@ import { IconType, IListItem } from '../../types';
 import { ISearchFormProps } from './SearchForm.types';
 import styles from './SearchForm.module.css';
 import { TailSpin } from 'svg-loaders-react';
+import { useIsLarge } from '../../hooks/utils';
 
 export const SearchForm: FC<ISearchFormProps> = ({
   searchFunction,
@@ -18,6 +19,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
   const formRef = useRef<HTMLFormElement>(null);
   const [showNothingFound, setShowNothingFound] = useState(false);
   const { scrollDirection, isSticky } = useScrollDirection();
+  const isLarge = useIsLarge();
   let cssClass = styles.sticky;
   if (isSticky && scrollDirection === 'up') {
     cssClass = [styles.sticky, styles.stickyVisible].join(' ');
@@ -69,7 +71,11 @@ export const SearchForm: FC<ISearchFormProps> = ({
   return (
     <form onSubmit={handleSubmit} className={cssClass} ref={formRef}>
       <ContentContainer animate>
-        <div className="flex relative items-center mx-auto h-full">
+        <div
+          className={`flex relative items-center mx-auto h-full ${
+            !isLarge ? 'mr-20' : ''
+          }`}
+        >
           <label className="sr-only" htmlFor="vitra-search">
             Find Objects
           </label>
