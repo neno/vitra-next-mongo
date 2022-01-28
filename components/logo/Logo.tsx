@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export const Logo: FC = () => {
   const ratio = 37 / 51;
-  const width = 98;
+  const width = 80;
   const height = width * ratio;
   return (
     <Image

@@ -111,17 +111,9 @@ export const SearchForm: FC<ISearchFormProps> = ({
               <Icon iconName={IconType.Close} size="2.5rem" />
             </button>
           </div>
-          {/* <div className="w-20 sm:w-24 h-20 sm:hidden sm:h-24 flex-none flex justify-center items-center ">
-            <Icon iconName={IconType.Menu} size="2.5rem" />
-          </div> */}
         </div>
       </ContentContainer>
       {showNothingFound && <NothingFound />}
     </form>
   );
 };
-
-// position: absolute;
-// right: 1rem;
-// top: 50%;
-// margin-top: -1.25rem;

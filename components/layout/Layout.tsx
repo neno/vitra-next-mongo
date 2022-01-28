@@ -58,6 +58,7 @@ export const Layout: FC = ({ children }) => {
       <button
         onClick={toggleNav}
         className="fixed  top-0 right-0 z-10 w-20 sm:w-24 h-20 sm:h-24 flex-none flex justify-center items-center bg-white/75 rounded-full"
+        aria-label="Toggle navigation"
       >
         <Icon iconName={IconType.Menu} size="2.5rem" />
       </button>
