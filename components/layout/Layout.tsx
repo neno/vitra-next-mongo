@@ -11,12 +11,12 @@ export const Layout: FC = ({ children }) => {
 
   const navWidth = isSmall ? '10.5rem' : '100vw';
 
-  const versionsNav = {
+  const variantsNav = {
     initial: { marginLeft: `-${navWidth}` },
     animate: { marginLeft: 0 },
   };
 
-  const versionsMain = {
+  const variantsMain = {
     initial: { marginLeft: 0 },
     animate: { marginLeft: navWidth },
   };
@@ -33,17 +33,24 @@ export const Layout: FC = ({ children }) => {
   return (
     <>
       <div className="w-[100vw] w-max-[100vw] z-0 relative mx-auto block sm:flex bg-white w-full h-full min-h-full">
-        <motion.div
-          className={`fixed flex-none w-[${navWidth}] top-0 h-full z-20 bg-white overflow-hidden white`}
-          initial={versionsNav.initial}
-          animate={isNavOpen ? versionsNav.animate : versionsNav.initial}
-        >
-          <Nav />
-        </motion.div>
+        <AnimatePresence>
+          {isNavOpen && (
+            <motion.div
+              className={`fixed flex-none w-[${
+                navWidth ?? ''
+              }] top-0 h-full z-20 bg-white overflow-hidden`}
+              initial={variantsNav.initial}
+              animate={variantsNav.animate}
+              exit={variantsNav.initial}
+            >
+              <Nav />
+            </motion.div>
+          )}
+        </AnimatePresence>
         <motion.main
           className={`flex-grow flex-shrink relative z-5 h-full ml-[10.5rem]`}
-          initial={versionsMain.initial}
-          animate={isNavOpen ? versionsMain.animate : versionsMain.initial}
+          initial={variantsMain.initial}
+          animate={isNavOpen ? variantsMain.animate : variantsMain.initial}
         >
           {children}
         </motion.main>
