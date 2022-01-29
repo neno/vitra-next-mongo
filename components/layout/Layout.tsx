@@ -13,13 +13,13 @@ export const Layout: FC = ({ children }) => {
   const navWidth = isSmall ? `${widthNavigation}` : '100vw';
 
   const variantsNav = {
-    initial: { marginLeft: `-${navWidth}` },
-    animate: { marginLeft: 0 },
+    initial: { marginLeft: `-${navWidth}`, transition: { ease: 'easeInOut' } },
+    animate: { marginLeft: 0, transition: { ease: 'easeInOut' } },
   };
 
   const variantsMain = {
-    initial: { marginLeft: 0 },
-    animate: { marginLeft: navWidth },
+    initial: { marginLeft: 0, transition: { ease: 'easeInOut' } },
+    animate: { marginLeft: navWidth, transition: { ease: 'easeInOut' } },
   };
 
   const {

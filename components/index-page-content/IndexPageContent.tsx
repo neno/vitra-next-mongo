@@ -74,7 +74,12 @@ export const IndexPageContent = ({
             isNavOpen ? { marginLeft: widthNavigation } : { marginLeft: 0 }
           }
           animate={
-            isNavOpen ? { marginLeft: widthNavigation } : { marginLeft: 0 }
+            isNavOpen
+              ? {
+                  marginLeft: widthNavigation,
+                  transition: { ease: 'easeInOut' },
+                }
+              : { marginLeft: 0, transition: { ease: 'easeInOut' } }
           }
         >
           <h2 className="sr-only">Find {domain}</h2>
