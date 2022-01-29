@@ -83,20 +83,18 @@ export const IndexPageContent = ({
           }
         >
           <h2 className="sr-only">Find {domain}</h2>
-          <div className="">
-            <SearchForm
-              searchFunction={searchFunction}
-              setSearchItems={setSearchItems}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              placeholder={
-                isLarge
-                  ? `Search among ${totalCount} ${domain}…`
-                  : `Search ${domain}…`
-              }
-              setShowSkeleton={setShowSkeleton}
-            />
-          </div>
+          <SearchForm
+            searchFunction={searchFunction}
+            setSearchItems={setSearchItems}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            placeholder={
+              isLarge
+                ? `Search among ${totalCount} ${domain}…`
+                : `Search ${domain}…`
+            }
+            setShowSkeleton={setShowSkeleton}
+          />
           {/* {showSkeleton && <ListItemSkeleton />} */}
           {showSearchItems && (
             <div className="relative z-5 border-b mt-[-1px]">

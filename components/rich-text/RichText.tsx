@@ -7,7 +7,7 @@ import { IRichTextProps } from './RichText.type';
 export const RichText: FC<IRichTextProps> = ({ text }) => {
   return (
     <ContentContainer isSection>
-      <ReactMarkdown className="py-4" rehypePlugins={[rehypeRaw]}>
+      <ReactMarkdown className="py-4 px-4 md:px-0" rehypePlugins={[rehypeRaw]}>
         {text}
       </ReactMarkdown>
     </ContentContainer>
