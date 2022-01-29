@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useVitraData } from '../../context/VitraContext';
+import { useIsSmall } from '../../hooks/utils';
 import { ContentContainer, Icon } from '..';
 import { Logo } from '../logo';
 import { IconType } from '../../types';
@@ -17,6 +18,7 @@ const navItems = [
 export const Nav: FC = () => {
   const router = useRouter();
   const { setVitraData } = useVitraData();
+  const isSmall = useIsSmall();
 
   const isActive = (path: string): boolean => {
     if (path === '/') {
@@ -26,7 +28,7 @@ export const Nav: FC = () => {
   };
 
   const onClick = () => {
-    setVitraData({ isNavOpen: false });
+    !isSmall && setVitraData({ isNavOpen: false });
   };
 
   return (

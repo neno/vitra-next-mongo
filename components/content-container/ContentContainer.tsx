@@ -25,7 +25,7 @@ export const ContentContainer: FC<IContentContainerProps> = ({
   if (animate) {
     return (
       <motion.div
-        className={`border-t relative z-1 bg-white overflow-hidden border-b border-b-white`}
+        className={`border-t relative z-1 bg-white overflow-hidden `}
         whileHover={whileHover}
       >
         {renderContent()}
@@ -34,7 +34,7 @@ export const ContentContainer: FC<IContentContainerProps> = ({
   }
 
   return (
-    <div className="border-t relative z-1 bg-white overflow-hidden border-b border-b-white">
+    <div className="border-t relative z-1 bg-white overflow-hidden ">
       {renderContent()}
     </div>
   );

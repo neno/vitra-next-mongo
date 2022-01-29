@@ -68,8 +68,11 @@ export const IndexPageContent = ({
   return (
     <>
       <PageHeader>{domain}</PageHeader>
-      <section className="fixed z-10 top-0 left-0 w-full border-b">
+      <section className="fixed z-10 top-0 left-0 w-full">
         <motion.div
+          initial={
+            isNavOpen ? { marginLeft: widthNavigation } : { marginLeft: 0 }
+          }
           animate={
             isNavOpen ? { marginLeft: widthNavigation } : { marginLeft: 0 }
           }
@@ -91,7 +94,7 @@ export const IndexPageContent = ({
           </div>
           {/* {showSkeleton && <ListItemSkeleton />} */}
           {showSearchItems && (
-            <div className="relative z-5 pt-20 sm:pt-24">
+            <div className="relative z-5 border-b mt-[-1px]">
               <List
                 items={searchItems ?? []}
                 domain={domain}
@@ -107,7 +110,7 @@ export const IndexPageContent = ({
           // On first load listItems will be empty.
           // Therefore we take the chunkItems.
           // All subsequent renderings will contain the listItems
-          <div className={` ${hideListItems ? 'hidden' : ''}`}>
+          <div className={`mt-[-1px] ${hideListItems ? 'hidden' : ''}`}>
             <List
               items={listItems.length > 0 ? listItems : chunkItems[0]}
               domain={domain}

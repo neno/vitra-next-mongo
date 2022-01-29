@@ -15,6 +15,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
 }) => {
   const formRef = useRef<HTMLFormElement>(null);
   const [showNothingFound, setShowNothingFound] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const { isLoading } = useQuery(
     [searchFunction.name, { q: searchTerm }],
@@ -50,6 +51,13 @@ export const SearchForm: FC<ISearchFormProps> = ({
     setShowNothingFound(false);
   };
 
+  const onFocus = () => {
+    setIsFocused(true);
+  };
+  const onBlur = () => {
+    setIsFocused(false);
+  };
+
   useEffect(() => {
     if (formRef.current && searchTerm) {
       formRef.current.scrollIntoView();
@@ -60,7 +68,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
     <form
       onSubmit={handleSubmit}
       ref={formRef}
-      className="mt-[-2px] sm:mt-0 relative"
+      className="mt-[-2px] sm:mt-0 relative border-b"
     >
       <ContentContainer animate>
         <div className="flex relative items-center h-full mr-[5rem] sm:mr-[6rem] md:mr-0">
@@ -77,6 +85,8 @@ export const SearchForm: FC<ISearchFormProps> = ({
               placeholder={placeholder}
               value={searchTerm}
               onChange={handleChange}
+              onFocus={onFocus}
+              onBlur={onBlur}
               className="w-full border h-12 md:h-14 text-2xl md:text-4xl leading-loose p-2 pr-12 focus:text-white focus:bg-black"
             />
             <button type="submit" className="sr-only">
@@ -91,9 +101,9 @@ export const SearchForm: FC<ISearchFormProps> = ({
             </div>
             <button
               onClick={reset}
-              className={`flex z-10 text-white absolute right-2 top-[50%] mt-[-1.25rem] ${
-                !searchTerm || isLoading ? 'invisible' : ''
-              }`}
+              className={`flex z-10 absolute right-2 top-[50%] mt-[-1.25rem] 
+              ${isFocused ? 'text-white' : 'text-black'}
+              ${!searchTerm || isLoading ? 'invisible' : ''}`}
               title="Clear search term"
             >
               <Icon iconName={IconType.Close} size="2.5rem" />
