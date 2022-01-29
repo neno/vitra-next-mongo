@@ -71,12 +71,12 @@ export const IndexPageContent = ({
       <section className="fixed z-10 top-0 left-0 w-full">
         <motion.div
           initial={
-            isNavOpen ? { marginLeft: widthNavigation } : { marginLeft: 0 }
+            isNavOpen ? { marginLeft: widthNavigation ?? 0 } : { marginLeft: 0 }
           }
           animate={
             isNavOpen
               ? {
-                  marginLeft: widthNavigation,
+                  marginLeft: widthNavigation ?? 0,
                   transition: { ease: 'easeInOut' },
                 }
               : { marginLeft: 0, transition: { ease: 'easeInOut' } }

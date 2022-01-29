@@ -10,16 +10,19 @@ import { widthNavigation } from '../../constants';
 export const Layout: FC = ({ children }) => {
   const isSmall = useIsSmall();
 
-  const navWidth = isSmall ? `${widthNavigation}` : '100vw';
+  const navWidth = isSmall ? `${widthNavigation ?? 0}` : '100vw';
 
   const variantsNav = {
-    initial: { marginLeft: `-${navWidth}`, transition: { ease: 'easeInOut' } },
+    initial: {
+      marginLeft: `-${navWidth ?? 0}`,
+      transition: { ease: 'easeInOut' },
+    },
     animate: { marginLeft: 0, transition: { ease: 'easeInOut' } },
   };
 
   const variantsMain = {
     initial: { marginLeft: 0, transition: { ease: 'easeInOut' } },
-    animate: { marginLeft: navWidth, transition: { ease: 'easeInOut' } },
+    animate: { marginLeft: navWidth ?? 0, transition: { ease: 'easeInOut' } },
   };
 
   const {
@@ -49,7 +52,9 @@ export const Layout: FC = ({ children }) => {
           )}
         </AnimatePresence>
         <motion.main
-          className={`flex-grow flex-shrink relative z-5 h-full ml-[${widthNavigation}]`}
+          className={`flex-grow flex-shrink relative z-5 h-full ml-[${
+            widthNavigation ?? 0
+          }]`}
           initial={variantsMain.initial}
           animate={isNavOpen ? variantsMain.animate : variantsMain.initial}
         >

@@ -5,4 +5,5 @@ export interface IListItemProps {
   item: IListItem;
   domain: DomainType;
   showImage?: boolean;
+  isFavorite?: boolean;
 }

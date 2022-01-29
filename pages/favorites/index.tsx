@@ -27,7 +27,11 @@ export const FavoritesPage: NextPage = () => {
 
         <Aside title="Objects">
           {favoriteObjects.length > 0 && (
-            <List items={favoriteObjects} domain={DomainType.Objects} />
+            <List
+              items={favoriteObjects}
+              domain={DomainType.Objects}
+              isFavorite
+            />
           )}
           {favoriteObjects.length === 0 && (
             <NothingFound text="No favorite objects set." />
@@ -35,7 +39,11 @@ export const FavoritesPage: NextPage = () => {
         </Aside>
         <Aside title="Designers">
           {favoriteDesigners.length > 0 && (
-            <List items={favoriteDesigners} domain={DomainType.Designers} />
+            <List
+              items={favoriteDesigners}
+              domain={DomainType.Designers}
+              isFavorite
+            />
           )}
           {favoriteDesigners.length === 0 && (
             <NothingFound text="No favorite designers set." />
@@ -46,6 +54,7 @@ export const FavoritesPage: NextPage = () => {
             <List
               items={favoriteManufacturers}
               domain={DomainType.Manufacturers}
+              isFavorite
             />
           )}
           {favoriteManufacturers.length === 0 && (

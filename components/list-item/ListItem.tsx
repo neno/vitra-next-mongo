@@ -9,15 +9,28 @@ export const ListItem: FC<IListItemProps> = ({
   item: { id, image, title, text },
   domain,
   showImage = true,
+  isFavorite = false,
 }) => {
   const itemPath = useMemo(() => {
     return `/${domain}/${id}`;
   }, [domain, id]);
 
+  const removeFromFavorites = () => {};
+
   return (
     <div className="relative">
       <ContentContainer animate>
         <article className="flex items-center h-20 sm:h-24 overflow-hidden">
+          {isFavorite && (
+            <button
+              // className={`${cssClass} ${isFavorite ? styles.active : ''}`}
+              onClick={removeFromFavorites}
+              title="Remove from favorites"
+              className="text-white bg-black flex p-1 rounded-full align-center"
+            >
+              <Icon iconName={IconType.Highlight} size="2rem" />
+            </button>
+          )}
           {showImage && (
             <div className="flex-none w-20 sm:w-24 h-full relative">
               {image && (
@@ -50,9 +63,10 @@ export const ListItem: FC<IListItemProps> = ({
               </a>
             </Link>
           </div>
-          <div className="flex-none text-gray-400 w-8">
+
+          {/* <div className="flex-none text-gray-400 w-8">
             <Icon iconName={IconType.Next} />
-          </div>
+          </div> */}
         </article>
       </ContentContainer>
     </div>
