@@ -9,6 +9,8 @@ import {
 } from '../../components';
 import { DomainType } from '../../types';
 import { useIsLarge } from '../../hooks/utils';
+import { widthNavigation } from '../../constants';
+import { useVitraData } from '../../context/VitraContext';
 
 export const IndexPageContent = ({
   chunkItems,
@@ -17,6 +19,9 @@ export const IndexPageContent = ({
   useData,
   searchFunction,
 }: IndexPageContentProps) => {
+  const {
+    vitraData: { isNavOpen },
+  } = useVitraData();
   const {
     data,
     setData,
@@ -62,28 +67,34 @@ export const IndexPageContent = ({
   return (
     <>
       <PageHeader>{domain}</PageHeader>
-      <section className="relative z-10">
-        <h2 className="sr-only">Find {domain}</h2>
-        <SearchForm
-          searchFunction={searchFunction}
-          setSearchItems={setSearchItems}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          placeholder={
-            isLarge
-              ? `Search among ${totalCount} ${domain}…`
-              : `Search ${domain}…`
-          }
-          setShowSkeleton={setShowSkeleton}
-        />
-        {showSkeleton && <ListItemSkeleton />}
-        {showSearchItems && (
-          <List
-            items={searchItems ?? []}
-            domain={domain}
-            showImage={domain !== DomainType.Manufacturers}
-          />
-        )}
+      <section className="fixed z-10 top-0 left-0 w-full border-b">
+        <div className={isNavOpen ? `ml-[${widthNavigation}]` : ''}>
+          <h2 className="sr-only">Find {domain}</h2>
+          <div className="">
+            <SearchForm
+              searchFunction={searchFunction}
+              setSearchItems={setSearchItems}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+              placeholder={
+                isLarge
+                  ? `Search among ${totalCount} ${domain}…`
+                  : `Search ${domain}…`
+              }
+              setShowSkeleton={setShowSkeleton}
+            />
+          </div>
+          {/* {showSkeleton && <ListItemSkeleton />} */}
+          {showSearchItems && (
+            <div className="relative z-5 pt-20 sm:pt-24">
+              <List
+                items={searchItems ?? []}
+                domain={domain}
+                showImage={domain !== DomainType.Manufacturers}
+              />
+            </div>
+          )}
+        </div>
       </section>
       <section className="relative z-5 pt-20 sm:pt-24">
         <h2 className="sr-only">Listing all {domain}</h2>
@@ -91,7 +102,7 @@ export const IndexPageContent = ({
           // On first load listItems will be empty.
           // Therefore we take the chunkItems.
           // All subsequent renderings will contain the listItems
-          <div className={` ${hideListItems && 'hidden'}`}>
+          <div className={` ${hideListItems ? 'hidden' : ''}`}>
             <List
               items={listItems.length > 0 ? listItems : chunkItems[0]}
               domain={domain}

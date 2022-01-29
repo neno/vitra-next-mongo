@@ -5,11 +5,12 @@ import { useVitraData } from '../../context/VitraContext';
 import { IconType } from '../../types';
 import { Nav } from '../nav';
 import { useIsSmall } from '../../hooks/utils';
+import { widthNavigation } from '../../constants';
 
 export const Layout: FC = ({ children }) => {
   const isSmall = useIsSmall();
 
-  const navWidth = isSmall ? '10.5rem' : '100vw';
+  const navWidth = isSmall ? `${widthNavigation}` : '100vw';
 
   const variantsNav = {
     initial: { marginLeft: `-${navWidth}` },
@@ -48,7 +49,7 @@ export const Layout: FC = ({ children }) => {
           )}
         </AnimatePresence>
         <motion.main
-          className={`flex-grow flex-shrink relative z-5 h-full ml-[10.5rem]`}
+          className={`flex-grow flex-shrink relative z-5 h-full ml-[${widthNavigation}]`}
           initial={variantsMain.initial}
           animate={isNavOpen ? variantsMain.animate : variantsMain.initial}
         >

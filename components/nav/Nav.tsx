@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useVitraData } from '../../context/VitraContext';
 import { ContentContainer, Icon } from '..';
 import { Logo } from '../logo';
 import { IconType } from '../../types';
@@ -15,12 +16,17 @@ const navItems = [
 
 export const Nav: FC = () => {
   const router = useRouter();
+  const { setVitraData } = useVitraData();
 
   const isActive = (path: string): boolean => {
     if (path === '/') {
       return router.pathname === path || router.pathname.includes('/objects');
     }
     return router.pathname === path || router.pathname.includes(path);
+  };
+
+  const onClick = () => {
+    setVitraData({ isNavOpen: false });
   };
 
   return (
@@ -37,6 +43,7 @@ export const Nav: FC = () => {
               <ContentContainer>
                 <Link href={item.path}>
                   <a
+                    onClick={onClick}
                     className={`flex h-full items-center p-4 text-xl md:text-xl ${
                       styles.link
                     } ${isActive(item.path) ? styles.active : ''}`}
