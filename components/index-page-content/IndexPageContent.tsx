@@ -1,5 +1,6 @@
 import { useEffect, useCallback, useMemo } from 'react';
 import { useIntersect } from '../../hooks/use-intersect';
+import { motion } from 'framer-motion';
 import { IndexPageContentProps } from './IndexPageContent.types';
 import {
   SearchForm,
@@ -68,7 +69,11 @@ export const IndexPageContent = ({
     <>
       <PageHeader>{domain}</PageHeader>
       <section className="fixed z-10 top-0 left-0 w-full border-b">
-        <div className={isNavOpen ? `ml-[${widthNavigation}]` : ''}>
+        <motion.div
+          animate={
+            isNavOpen ? { marginLeft: widthNavigation } : { marginLeft: 0 }
+          }
+        >
           <h2 className="sr-only">Find {domain}</h2>
           <div className="">
             <SearchForm
@@ -94,7 +99,7 @@ export const IndexPageContent = ({
               />
             </div>
           )}
-        </div>
+        </motion.div>
       </section>
       <section className="relative z-5 pt-20 sm:pt-24">
         <h2 className="sr-only">Listing all {domain}</h2>
