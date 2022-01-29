@@ -4,6 +4,7 @@ import { ContentContainer, Icon, NothingFound } from '..';
 import { IconType, IListItem } from '../../types';
 import { ISearchFormProps } from './SearchForm.types';
 import { TailSpin } from 'svg-loaders-react';
+import { useVitraData } from '../../context/VitraContext';
 
 export const SearchForm: FC<ISearchFormProps> = ({
   searchFunction,
@@ -16,6 +17,9 @@ export const SearchForm: FC<ISearchFormProps> = ({
   const formRef = useRef<HTMLFormElement>(null);
   const [showNothingFound, setShowNothingFound] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const {
+    vitraData: { isNavOpen },
+  } = useVitraData();
 
   const { isLoading } = useQuery(
     [searchFunction.name, { q: searchTerm }],
@@ -71,7 +75,13 @@ export const SearchForm: FC<ISearchFormProps> = ({
       className="mt-[-2px] sm:mt-0 relative border-b"
     >
       <ContentContainer animate>
-        <div className="flex relative items-center h-full mr-[5rem] sm:mr-[6rem] md:mr-0">
+        <div
+          className={`flex relative items-center h-full max-w-[calc(100%_-_80px)]  ${
+            isNavOpen
+              ? 'max-w-[calc(100%_-_80px)]'
+              : 'md:max-w-[calc(100%_-_20px)] lg:max-w-full'
+          }`}
+        >
           <label className="sr-only" htmlFor="vitra-search">
             Find Objects
           </label>
