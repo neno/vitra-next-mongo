@@ -54,6 +54,7 @@ export const FavoritesPage: NextPage = () => {
             <List
               items={favoriteManufacturers}
               domain={DomainType.Manufacturers}
+              showImage={false}
               isFavorite
             />
           )}
