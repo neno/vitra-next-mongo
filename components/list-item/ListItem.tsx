@@ -102,7 +102,10 @@ export const ListItem: FC<IListItemProps> = ({
               animate={{ x: 0, transition: { type: 'tween' } }}
               exit={{ x: '-100%', transition: { type: 'tween' } }}
             >
-              <p>Remove this item from favorites?</p>
+              <p>
+                Remove this
+                <span className="hidden sm:inline"> item from favorites</span>?
+              </p>
               <div className="flex items-center space-x-4">
                 <button
                   className="px-2 border"
