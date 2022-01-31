@@ -13,7 +13,7 @@ import {
   Search,
   Up,
 } from './icons';
-import styles from './Icon.module.scss';
+import cssClasses from './Icon.module.scss';
 
 const icons = {
   [IconType.Close]: Close,
@@ -28,13 +28,19 @@ const icons = {
   [IconType.Up]: Up,
 };
 
-export const Icon: FC<IIconProps> = ({ iconName, size }) => {
+export const Icon: FC<IIconProps> = ({ iconName, size, bg }) => {
   const Ico = icons[iconName];
+  const styles: { [key: string]: string | number } = {};
+  if (size) {
+    styles['width'] = size;
+    styles['height'] = size;
+  }
+
+  if (bg) {
+    styles['backgroundColor'] = bg;
+  }
   return (
-    <i
-      className={styles.icon}
-      style={size ? { width: size, height: size } : {}}
-    >
+    <i className={cssClasses.icon} style={styles}>
       <Ico />
     </i>
   );

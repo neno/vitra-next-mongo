@@ -9,8 +9,8 @@ export const NothingFound: FC<INothingFoundProps> = ({
   text = defaultText,
 }) => {
   return (
-    <ContentContainer>
-      <p className="pt-8 text-xl md:text-xl">{text}</p>
+    <ContentContainer isSection>
+      <p className="p-4 sm:px-0 text-xl md:text-xl">{text}</p>
     </ContentContainer>
   );
 };

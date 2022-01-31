@@ -66,7 +66,7 @@ export const Layout: FC = ({ children }) => {
         className="fixed top-0 right-0 z-10 w-20 sm:w-24 h-20 sm:h-24 flex-none flex justify-center items-center "
         aria-label="Toggle navigation"
       >
-        <Icon iconName={IconType.Menu} size="2.5rem" />
+        <Icon iconName={IconType.Menu} size="2.5rem" bg="white" />
       </button>
     </>
   );
