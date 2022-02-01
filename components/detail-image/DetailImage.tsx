@@ -13,7 +13,6 @@ export const DetailImage: FC<IDetailImageProps> = ({ src, alt }) => {
         height={640}
         alt={alt}
         objectFit="contain"
-        sizes="640px"
       />
     </div>
   );
