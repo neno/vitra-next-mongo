@@ -72,7 +72,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
     <form
       onSubmit={handleSubmit}
       ref={formRef}
-      className="mt-[-2px] sm:mt-0 relative border-b"
+      className=" sm:mt-0 relative overflow-hidden border-b"
     >
       <ContentContainer animate>
         <div

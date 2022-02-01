@@ -97,7 +97,7 @@ export const IndexPageContent = ({
           />
           {/* {showSkeleton && <ListItemSkeleton />} */}
           {showSearchItems && (
-            <div className="relative z-5 border-b mt-[-1px]">
+            <div className="relative z-5 border-b">
               <List
                 items={searchItems ?? []}
                 domain={domain}
@@ -113,7 +113,7 @@ export const IndexPageContent = ({
           // On first load listItems will be empty.
           // Therefore we take the chunkItems.
           // All subsequent renderings will contain the listItems
-          <div className={`mt-[-1px] ${hideListItems ? 'hidden' : ''}`}>
+          <div className={`${hideListItems ? 'hidden' : ''}`}>
             <List
               items={listItems.length > 0 ? listItems : chunkItems[0]}
               domain={domain}
