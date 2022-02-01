@@ -97,7 +97,7 @@ export const SearchForm: FC<ISearchFormProps> = ({
               onChange={handleChange}
               onFocus={onFocus}
               onBlur={onBlur}
-              className="w-full border h-12 md:h-14 text-2xl md:text-4xl leading-loose p-2 pr-12 focus:text-white focus:bg-black"
+              className="w-full border h-12 md:h-14 text-xl md:text-2xl leading-loose p-2 pr-12 focus:text-white focus:bg-black"
             />
             <button type="submit" className="sr-only">
               submit
