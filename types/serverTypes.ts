@@ -11,6 +11,11 @@ export interface IObjectItemServer {
   ObjMultimediaRel?: {
     [0]: {
       MulUrl: string; // Image
+      MulUrls: [
+        {
+          me: string;
+        }
+      ];
     };
   };
 }
@@ -61,6 +66,11 @@ export interface IDesignerItemServer {
   PerMultimediaRel?: {
     [0]: {
       MulUrl: string; // Image
+      MulUrls: [
+        {
+          me: string;
+        }
+      ];
     };
   };
 }
@@ -72,6 +82,11 @@ export interface IManufacturerItemServer {
   PerMultimediaRel?: {
     [0]: {
       MulUrl: string; // Image
+      MulUrls: [
+        {
+          me: string;
+        }
+      ];
     };
   };
 }
@@ -92,6 +107,11 @@ export interface IPersonServer {
   PerMultimediaRel?: {
     [0]: {
       MulUrl: string; // Image
+      MulUrls: [
+        {
+          me: string;
+        }
+      ];
     };
   };
 }

@@ -14,6 +14,11 @@ const schema = new Schema<IObjectServer>({
   ObjMultimediaRel: [
     {
       MulUrl: String,
+      MulUrls: [
+        {
+          me: String,
+        },
+      ],
     },
   ],
   ObjCategoryVoc: String,

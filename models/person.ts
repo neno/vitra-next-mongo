@@ -21,6 +21,11 @@ const schema = new Schema<IPersonServer>({
   PerMultimediaRel: [
     {
       MulUrl: String,
+      MulUrls: [
+        {
+          me: String,
+        },
+      ],
     },
   ],
   PerObjectRel: [objectRelationSchema],

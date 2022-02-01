@@ -40,21 +40,6 @@ export const createCommaSeparatedString = (...items: string[]): string => {
   return items.filter((item: string) => item).join(', ');
 };
 
-export const mapDocumentsToObjectItems = (
-  documents: IObjectItemServer[]
-): IObjectItem[] => {
-  return documents.map((doc: IObjectItemServer) => ({
-    id: doc._id,
-    fullTitle: createCommaSeparatedString(
-      doc?.ObjObjectTitleTxt ?? '',
-      doc?.ObjDateGrp_DateFromTxt ?? ''
-    ),
-    designer: doc?.ObjDesigner ?? '',
-    highlight: doc?.ObjHighlight ?? '',
-    image: doc?.ObjMultimediaRel?.[0]?.MulUrl ?? '',
-  }));
-};
-
 export const mapObjectDocumentsToListItems = (
   documents: IObjectItemServer[]
 ): IListItem[] => {
@@ -65,7 +50,7 @@ export const mapObjectDocumentsToListItems = (
       doc?.ObjDateGrp_DateFromTxt ?? ''
     ),
     text: doc?.ObjDesigner ?? '',
-    image: doc?.ObjMultimediaRel?.[0]?.MulUrl ?? '',
+    image: doc?.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
   }));
 };
 
@@ -80,6 +65,7 @@ export function mapDocumentToObject(doc: IObjectServer): IObject {
     dating: doc?.ObjDateTxt ?? '',
     designer: doc?.ObjDesigner ?? '',
     image: doc?.ObjMultimediaRel?.[0]?.MulUrl ?? null,
+    thumbnail: doc?.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
     material: doc.ObjMaterialTechniqueTxt ?? '',
     dimensions: doc.ObjDimension ?? '',
     designed: doc.ObjDateGrp_DateFromTxt ?? '',
@@ -129,7 +115,7 @@ export const mapDesignerDocumentsToListItems = (
     id: doc._id,
     title: doc?.PerNameSortedTxt ?? '',
     text: doc?.PerDatingTxt ?? '',
-    image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? '',
+    image: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
   }));
 };
 
@@ -143,7 +129,7 @@ export const mapManufacturerDocumentsToListItems = (
       doc.PerBirthPlaceCity ?? '',
       doc.PerNationalityTxt ?? ''
     ),
-    image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? '',
+    image: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
   }));
 };
 
@@ -154,6 +140,7 @@ export const mapDocumentToPerson = (doc: IPersonServer): IPerson => {
     nameSorted: doc.PerNameSortedTxt ?? '',
     dating: doc.PerDatingTxt ?? '',
     image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? null,
+    thumbnail: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
     place: doc.PerBirthPlaceCity ?? '',
     country: doc.PerBirthPlaceCountry ?? '',
     type: doc.PerTypeVoc ?? '',
@@ -173,21 +160,21 @@ export const mapObjectToListItem = (obj: IObject): IListItem => ({
   id: obj.id,
   title: createCommaSeparatedString(obj.title, obj.dating),
   text: obj.designer,
-  image: obj.image,
+  image: obj.thumbnail,
 });
 
 export const mapDesignerToListItem = (person: IPerson): IListItem => ({
   id: person.id,
   title: person.nameSorted,
   text: person.dating,
-  image: person.image,
+  image: person.thumbnail,
 });
 
 export const mapManufacturerToListItem = (person: IPerson): IListItem => ({
   id: person.id,
   title: person.name,
   text: createCommaSeparatedString(person.place, person.country),
-  image: person.image,
+  image: person.thumbnail,
 });
 
 export const getAppTitle = (title: string) => {

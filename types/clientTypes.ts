@@ -4,10 +4,11 @@ export interface IObjectItem {
   id: number;
   fullTitle: string;
   designer: string;
-  image: string | null;
+  thumbnail: string | null;
 }
 
 export interface IObject extends IObjectItem {
+  image: string | null;
   title: string;
   designed: string;
   material: string;
@@ -45,6 +46,7 @@ export interface IPerson {
   nameSorted: string;
   dating: string;
   image: string | null;
+  thumbnail: string | null;
   place: string;
   country: string;
   type: PersonType;
