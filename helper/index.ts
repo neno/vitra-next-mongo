@@ -36,6 +36,11 @@ export const splitArrayIntoEqualChunks = (
   return res;
 };
 
+export const stripHtmlTags = (originalString: string) => {
+  if (!originalString) return '';
+  return originalString.replace(/(<([^>]+)>)/gi, '');
+};
+
 export const createCommaSeparatedString = (...items: string[]): string => {
   return items.filter((item: string) => item).join(', ');
 };
@@ -54,18 +59,18 @@ export const mapObjectDocumentsToListItems = (
   }));
 };
 
-export function mapDocumentToObject(doc: IObjectServer): IObject {
+export const mapDocumentToObject = (doc: IObjectServer): IObject => {
   return {
     id: doc._id,
     fullTitle: createCommaSeparatedString(
-      doc?.ObjObjectTitleTxt ?? '',
-      doc?.ObjDateGrp_DateFromTxt ?? ''
+      doc.ObjObjectTitleTxt ?? '',
+      doc.ObjDateGrp_DateFromTxt ?? ''
     ),
-    title: doc?.ObjObjectTitleTxt ?? '',
-    dating: doc?.ObjDateTxt ?? '',
-    designer: doc?.ObjDesigner ?? '',
-    image: doc?.ObjMultimediaRel?.[0]?.MulUrl ?? null,
-    thumbnail: doc?.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
+    title: doc.ObjObjectTitleTxt ?? '',
+    dating: doc.ObjDateTxt ?? '',
+    designer: doc.ObjDesigner ?? '',
+    image: doc.ObjMultimediaRel?.[0]?.MulUrl ?? null,
+    thumbnail: doc.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
     material: doc.ObjMaterialTechniqueTxt ?? '',
     dimensions: doc.ObjDimension ?? '',
     designed: doc.ObjDateGrp_DateFromTxt ?? '',
@@ -75,7 +80,14 @@ export function mapDocumentToObject(doc: IObjectServer): IObject {
     description: doc.ObjMarkdown
       ? doc.ObjMarkdown.replace(/<br><br>/g, '<br>')
       : '',
-    metaDescription: doc.ObjFullText ? doc.ObjFullText : '',
+    metaDescription: createCommaSeparatedString(
+      doc.ObjDesigner ?? '',
+      doc.ObjObjectTitleTxt ?? '',
+      doc.ObjCategoryVoc ?? '',
+      doc.ObjDateGrp_DateFromTxt ?? '',
+      doc.ObjMaterialTechniqueTxt ?? '',
+      doc.ObjFullText ?? ''
+    ),
     relatedObjects:
       doc.ObjObjectRel?.map((obj: IObjectRelation) => ({
         id: obj.ObjId,
@@ -106,7 +118,7 @@ export function mapDocumentToObject(doc: IObjectServer): IObject {
         image: per.PerUrl ?? null,
       })) ?? [],
   };
-}
+};
 
 export const mapDesignerDocumentsToListItems = (
   documents: IDesignerItemServer[]
@@ -145,7 +157,7 @@ export const mapDocumentToPerson = (doc: IPersonServer): IPerson => {
     country: doc.PerBirthPlaceCountry ?? '',
     type: doc.PerTypeVoc ?? '',
     text: doc.PerMarkdown ?? '',
-    metaDescription: doc.PerFullText ?? '',
+    metaDescription: stripHtmlTags(doc.PerFullText ?? ''),
     relatedObjects:
       doc.PerObjectRel?.map((obj: IPersonObjectRelation) => ({
         id: obj.ObjId,
