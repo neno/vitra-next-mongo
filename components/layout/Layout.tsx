@@ -41,7 +41,7 @@ export const Layout: FC = ({ children }) => {
           {isNavOpen && (
             <motion.div
               className={`fixed flex-none w-[${
-                navWidth ?? ''
+                isSmall ? '10.5rem' : '100vw'
               }] top-0 h-full z-20 bg-white overflow-hidden`}
               initial={variantsNav.initial}
               animate={variantsNav.animate}
