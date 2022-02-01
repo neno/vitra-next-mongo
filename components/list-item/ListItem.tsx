@@ -6,6 +6,7 @@ import { ContentContainer, Icon } from '..';
 import { DomainType, IconType } from '../../types';
 import { IListItemProps } from './ListItem.type';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useIsSmall } from '../../hooks/utils';
 
 export const ListItem: FC<IListItemProps> = ({
   item: { id, image, title, text },
@@ -15,6 +16,7 @@ export const ListItem: FC<IListItemProps> = ({
 }) => {
   const { toggleFavorite } = useFavorites();
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const size = useIsSmall() ? 96 : 80;
   const itemPath = useMemo(() => {
     return `/${domain}/${id}`;
   }, [domain, id]);
@@ -48,10 +50,11 @@ export const ListItem: FC<IListItemProps> = ({
                     <Image
                       src={image}
                       alt={title}
+                      width={size}
+                      height={size}
                       objectFit={
                         domain === DomainType.Objects ? 'contain' : 'cover'
                       }
-                      layout="fill"
                       placeholder="blur"
                       blurDataURL={image}
                     />

@@ -23,8 +23,7 @@ export const FavoritesPage: NextPage = () => {
         />
       </Head>
       <div className="pb-16">
-        <Heading title="Favorites" designer="" />
-
+        <Heading title="Favorites" isTop />
         <Aside title="Objects">
           {favoriteObjects.length > 0 && (
             <List

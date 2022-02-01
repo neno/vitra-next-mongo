@@ -1,4 +1,5 @@
 export interface IHeadingProps {
   title: string;
-  designer: string;
+  designer?: string;
+  isTop?: boolean;
 }
