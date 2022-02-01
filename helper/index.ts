@@ -55,7 +55,7 @@ export const mapObjectDocumentsToListItems = (
       doc?.ObjDateGrp_DateFromTxt ?? ''
     ),
     text: doc?.ObjDesigner ?? '',
-    image: doc?.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
+    image: doc?.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? null,
   }));
 };
 
@@ -70,7 +70,7 @@ export const mapDocumentToObject = (doc: IObjectServer): IObject => {
     dating: doc.ObjDateTxt ?? '',
     designer: doc.ObjDesigner ?? '',
     image: doc.ObjMultimediaRel?.[0]?.MulUrl ?? null,
-    thumbnail: doc.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
+    thumbnail: doc.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? null,
     material: doc.ObjMaterialTechniqueTxt ?? '',
     dimensions: doc.ObjDimension ?? '',
     designed: doc.ObjDateGrp_DateFromTxt ?? '',
@@ -127,7 +127,7 @@ export const mapDesignerDocumentsToListItems = (
     id: doc._id,
     title: doc?.PerNameSortedTxt ?? '',
     text: doc?.PerDatingTxt ?? '',
-    image: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
+    image: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? null,
   }));
 };
 
@@ -141,7 +141,7 @@ export const mapManufacturerDocumentsToListItems = (
       doc.PerBirthPlaceCity ?? '',
       doc.PerNationalityTxt ?? ''
     ),
-    image: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
+    image: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? null,
   }));
 };
 
