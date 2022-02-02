@@ -24,6 +24,7 @@ const schema = new Schema<IPersonServer>({
       MulUrls: [
         {
           me: String,
+          la: String,
         },
       ],
     },

@@ -17,6 +17,7 @@ const schema = new Schema<IObjectServer>({
       MulUrls: [
         {
           me: String,
+          la: String,
         },
       ],
     },

@@ -69,7 +69,7 @@ export const mapDocumentToObject = (doc: IObjectServer): IObject => {
     title: doc.ObjObjectTitleTxt ?? '',
     dating: doc.ObjDateTxt ?? '',
     designer: doc.ObjDesigner ?? '',
-    image: doc.ObjMultimediaRel?.[0]?.MulUrl ?? null,
+    image: doc.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.la ?? null,
     thumbnail: doc.ObjMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? null,
     material: doc.ObjMaterialTechniqueTxt ?? '',
     dimensions: doc.ObjDimension ?? '',
@@ -151,8 +151,8 @@ export const mapDocumentToPerson = (doc: IPersonServer): IPerson => {
     name: doc.PerNameTxt ?? '',
     nameSorted: doc.PerNameSortedTxt ?? '',
     dating: doc.PerDatingTxt ?? '',
-    image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? null,
-    thumbnail: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? '',
+    image: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.la ?? null,
+    thumbnail: doc?.PerMultimediaRel?.[0]?.MulUrls?.[0]?.me ?? null,
     place: doc.PerBirthPlaceCity ?? '',
     country: doc.PerBirthPlaceCountry ?? '',
     type: doc.PerTypeVoc ?? '',
@@ -161,7 +161,10 @@ export const mapDocumentToPerson = (doc: IPersonServer): IPerson => {
     relatedObjects:
       doc.PerObjectRel?.map((obj: IPersonObjectRelation) => ({
         id: obj.ObjId,
-        title: obj.ObjObjectTitleTxt ?? '',
+        title: createCommaSeparatedString(
+          obj.ObjObjectTitleTxt ?? '',
+          obj.ObjDateGrp_DateFromTxt ?? ''
+        ),
         text: obj.ObjDesigner ?? '',
         image: obj.ObjUrl ?? null,
       })) ?? [],

@@ -14,6 +14,7 @@ export interface IObjectItemServer {
       MulUrls: [
         {
           me: string;
+          la: string;
         }
       ];
     };
@@ -69,6 +70,7 @@ export interface IDesignerItemServer {
       MulUrls: [
         {
           me: string;
+          la: string;
         }
       ];
     };
@@ -85,6 +87,7 @@ export interface IManufacturerItemServer {
       MulUrls: [
         {
           me: string;
+          la: string;
         }
       ];
     };
@@ -110,6 +113,7 @@ export interface IPersonServer {
       MulUrls: [
         {
           me: string;
+          la: string;
         }
       ];
     };
