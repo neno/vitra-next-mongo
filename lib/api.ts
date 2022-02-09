@@ -47,24 +47,6 @@ const manufacturerItemProjection = {
   PerMultimediaRel: 1,
 };
 
-//   id: doc._id,
-//   name: doc.PerNameTxt ?? '',
-//   nameSorted: doc.PerNameSortedTxt ?? '',
-//   dating: doc.PerDatingTxt ?? '',
-//   image: doc?.PerMultimediaRel?.[0]?.MulUrl ?? null,
-//   place: doc.PerBirthPlaceCity ?? '',
-//   country: doc.PerBirthPlaceCountry ?? '',
-//   type: doc.PerTypeVoc,
-//   text: doc.PerMarkdown ?? '',
-//   relatedObjects:
-//     doc.PerObjectRel?.map((obj: IPersonObjectRelation) => ({
-//       id: obj.ObjId,
-//       title: obj.ObjObjectTitleTxt ?? '',
-//       text: obj.ObjDesigner ?? '',
-//       image: obj.ObjUrl ?? null,
-//     })) ?? [],
-// };
-
 const personProjection = {
   _id: 1,
   PerTypeVoc: 1,
@@ -79,10 +61,15 @@ const personProjection = {
   PerFullText: 1,
 };
 
-export async function fetchObjectItems(): Promise<IListItem[]> {
+export async function fetchObjectItems(
+  page = 1,
+  limit = 20
+): Promise<IListItem[]> {
   await dbConnect();
   const objects = await Object.find({}, objectItemProjection)
     .sort({ ObjObjectTitleTxt: 1, ObjDateGrp_DateFromTxt: 1, ObjDesigner: 1 })
+    .skip(limit * (page - 1))
+    .limit(limit)
     .exec();
   return mapObjectDocumentsToListItems(objects);
 }

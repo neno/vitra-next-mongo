@@ -1,47 +1,25 @@
 import React from 'react';
 import type { AppProps } from 'next/app';
-import { QueryClientProvider, QueryClient } from 'react-query';
 import '../public/fonts/fonts.css';
 import 'tailwindcss/tailwind.css';
 import '../styles/global.css';
 import { Layout } from '../components';
 import { VitraProvider } from '../context/VitraContext';
-import {
-  ObjectsProvider,
-  DesignersProvider,
-  ManufacturersProvider,
-} from '../context';
-
-import { DomainType } from '../types';
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
-const providers = {
-  [DomainType.Objects]: ObjectsProvider,
-  [DomainType.Designers]: DesignersProvider,
-  [DomainType.Manufacturers]: ManufacturersProvider,
-};
+import { SWRConfig } from 'swr';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const DomainProvider = pageProps.domain
-    ? providers[pageProps.domain as DomainType]
-    : React.Fragment;
-
   return (
     <VitraProvider>
-      <QueryClientProvider client={queryClient}>
-        <Layout>
-          <DomainProvider>
-            <Component {...pageProps} />
-          </DomainProvider>
-        </Layout>
-      </QueryClientProvider>
+      <Layout>
+        <SWRConfig
+          value={{
+            fetcher: (url: string) => fetch(url).then((r) => r.json()),
+            suspense: true,
+          }}
+        >
+          <Component {...pageProps} />
+        </SWRConfig>
+      </Layout>
     </VitraProvider>
   );
 }

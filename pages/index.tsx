@@ -1,49 +1,33 @@
 import { NextPage } from 'next';
 import Head from 'next/head';
-import { fetchObjectItems } from '../lib/api';
-import { fetchAutoCompleteObjects } from '../lib/client-api';
-import { IndexPageContent } from '../components';
-import { DomainType, IListItem } from '../types';
-import { getAppTitle, splitArrayIntoEqualChunks } from '../helper';
-import { useObjectsData } from '../context';
+import { fetchObjectItems } from '@api';
+import { fetchAutoCompleteObjects } from '@clientApi';
+import { IListItem } from '@types';
+import { getAppTitle } from '@helper';
+import { SWRConfig } from 'swr';
+import { ErrorBoundary, ListingPage } from '@components';
+import { Suspense } from 'react';
 interface IPageProps {
-  chunkItems: IListItem[][];
-  totalCount: number;
-  domain: DomainType.Objects;
+  fallback: IListItem[];
 }
 
-const HomePage: NextPage<IPageProps> = ({
-  chunkItems,
-  totalCount,
-  domain,
-}: IPageProps) => {
+const HomePage: NextPage<IPageProps> = ({ fallback }: IPageProps) => {
   return (
-    <>
-      <Head>
-        <title>{getAppTitle('Objects')}</title>
-        <meta
-          name="description"
-          content="Listing design objects from the Vitra Design Museum"
-        />
-      </Head>
-      <IndexPageContent
-        chunkItems={chunkItems}
-        totalCount={totalCount}
-        domain={domain}
-        useData={useObjectsData}
-        searchFunction={fetchAutoCompleteObjects}
-      />
-    </>
+    <SWRConfig value={{ fallback }}>
+      <ErrorBoundary fallback={<h2>Could not fetch objects</h2>}>
+        <Suspense fallback="Loading…">
+          <ListingPage />
+        </Suspense>
+      </ErrorBoundary>
+    </SWRConfig>
   );
 };
 
 export default HomePage;
 
 export async function getStaticProps() {
-  const objects = await fetchObjectItems();
-  const totalCount = objects.length;
-  const chunkItems = splitArrayIntoEqualChunks(objects, 20);
+  const initialObjects = await fetchObjectItems();
   return {
-    props: { chunkItems, totalCount, domain: DomainType.Objects },
+    props: { fallback: initialObjects },
   };
 }
